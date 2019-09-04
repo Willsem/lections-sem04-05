@@ -1,2 +1,8 @@
+# MacOS files
 .DS_Store
 
+# LaTeX files
+*.aux
+*.log
+*.gz
+*.toc

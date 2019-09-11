@@ -4,10 +4,19 @@
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
+\usepackage[left=30mm, top=20mm, right=20mm, bottom=20mm, nohead, nofoot]{geometry}
 
 \usepackage{amsmath}
 \usepackage{MnSymbol}
 \usepackage{wasysym}
+
+\usepackage{amsthm}
+\usepackage{mdframed}
+
+\newmdtheoremenv{theorem}{Теорема}[chapter]
+\newtheorem{lemma}{Лемма}[chapter]
+\newtheorem{defenition}{Определение}[chapter]
+\newtheorem{note}{Замечание}[chapter]
 
 \author{Власов Павел Александрович}
 \title{Теория вероятностей}
@@ -53,11 +62,15 @@
 	
 	\end{enumerate}
 	
-	\underline{Определение} Область $D$ на плоскости называется \textbf{квадрируемой}, если $\exists$ конечные значения $S_*$, $S^*$ причем $S_* = S^*$. При этом число $S = S_* = S^*$ называется \textbf{площадью области $D$}
+    \begin{defenition}
+        Область $D$ на плоскости называется \textbf{квадрируемой}, если $\exists$ конечные значения $S_*$, $S^*$ причем $S_* = S^*$. При этом число $S = S_* = S^*$ называется \textbf{площадью области $D$}
+    \end{defenition}
 	
 	\hfill
 	
-	\underline{Определение} Говорят, что множество $D$ точек плоскости имеет площадь \textbf{нуль}, если $D$ можно целиком заключить в многоугольник, сколь угодной площади, т.е. $\forall \varepsilon > 0\ \exists$ многоугольник $M$ площади $\varepsilon$ такой, что $D \le M$
+    \begin{defenition}
+        Говорят, что множество $D$ точек плоскости имеет площадь \textbf{нуль}, если $D$ можно целиком заключить в многоугольник, сколь угодной площади, т.е. $\forall \varepsilon > 0\ \exists$ многоугольник $M$ площади $\varepsilon$ такой, что $D \le M$
+    \end{defenition}
 	
 	\hfill
 	
@@ -68,11 +81,15 @@
 		\item[3)] Спрямленная (с конечной длиной) кривая
 	\end{enumerate}
 	
-	\underline{Теорема} Пусть $D$ - замкнутая плоская область. Тогда $D$ - квадрируемая граница области $\Delta$. $\Leftrightarrow$ имеет площадь 0. $\blacksquare$
+    \begin{theorem}
+        Пусть $D$ - замкнутая плоская область. Тогда $D$ - квадрируемая граница области $\Delta$. $\Leftrightarrow$ имеет площадь 0. $\blacksquare$
+    \end{theorem}
 	
 	\hfill
 	
-	\underline{Теорема} Пусть $\alpha$ - плоская спрямленная кривая. Тогда $\alpha$ - имеет площадь нуль. $\blacksquare$
+    \begin{theorem}
+        Пусть $\alpha$ - плоская спрямленная кривая. Тогда $\alpha$ - имеет площадь нуль. $\blacksquare$
+    \end{theorem}
 	
 	\hfill
 	
@@ -80,7 +97,9 @@
 	
 	\hfill
 	
-	\underline{Замечание:} В дальнейшем мы будем рассматривать только квадрируемые области
+    \begin{note}
+        В дальнейшем мы будем рассматривать только квадрируемые области
+    \end{note}
 	
 	% ==================================================================
 	%	  ЧАСТЬ 2: ЗАДАЧИ, ПРИВОДЯЩИЕ К ПОНЯТИЮ ДВОЙНОГО ИНТЕГРАЛА
@@ -165,37 +184,42 @@
 	
 	Пусть $D$ - квадратичная замкнутая плоская область
 	
-	\hfill
-	
-	\underline{Определение} \textbf{Разбиение области $D$} называется множество $R = \{ D_1, ... D_n\}$, где 
+    \begin{defenition}
+        \textbf{Разбиение области $D$} называется множество $R = \{ D_1, ... D_n\}$, где 
 	
 	\begin{enumerate}
 		\item[1)] $D = \underset{i=1}{\overset{n}{U}} D_i$
 		\item[2)] $\text{int } D_i \cap \text{int } D_j = \emptyset$, при $i \ne j$
 		\item[3)] $D_i$ - квадрируема, $i = \overline{1,n}$
 	\end{enumerate}
+    \end{defenition}
 	
-	\underline{Определение} \textbf{Диаметром разбиения} $R = \{ D_1, ... D_n \}$ называется число 
+    \begin{defenition}
+    \textbf{Диаметром разбиения} $R = \{ D_1, ... D_n \}$ называется число 
 	
 	$$d(R) = \underset{i = \overline{1,n}}{\text{max diam}} (D_i)$$
+
+    \end{defenition}
 	
 	Пусть $D$ - квадратичная замкнутая область на плоскости $Oxy$, $f: D \to R$ ($f$ является функцией двух переменных, т.к. $D$ - область на плоскости)
 	
-	\hfill
-	
-	\underline{Определение} \textbf{Двойным интегралом функции $f$ по области $D$} называется число 
+    \begin{defenition}
+        \textbf{Двойным интегралом функции $f$ по области $D$} называется число 
 	
 	$$ \iint_D f(x,y) dx dy = \lim_{d(R) \to 0} \sum f(n_i) \Delta S_i, \text{ где}$$
 	
 	$$ R = \{D_1,...D_n\} \text{ - разбиение области } D $$
 	$$ M_i \in D_i,\ i = \overline{1,n} \text{ - отмеченные точки} $$
 	$$ \Delta S_i = S(D_i) $$
+    \end{defenition}
 	
-	\underline{Замечание} В определении подразумевается, что указанный предел существует, конечен и не зависит от разбиения $R$ области $D$ и способа выбора отмеченных точек
+    \begin{defenition}
+        В определении подразумевается, что указанный предел существует, конечен и не зависит от разбиения $R$ области $D$ и способа выбора отмеченных точек
+    \end{defenition}
 	
-	\hfill
-	
-	\underline{Определение} Функции $f$, для которых существует $\iint_\Delta f dx dy$, называются \textbf{интегрируемыми в $D$}
+    \begin{defenition}
+        Функции $f$, для которых существует $\iint_\Delta f dx dy$, называются \textbf{интегрируемыми в $D$}
+    \end{defenition}
 	
 	\hfill
 	
@@ -277,7 +301,9 @@
 		
 		\item[8)] Теорема о среднем значении
 		
-		\underline{Определение} \textbf{Средним значением функции $f$ в плоскости $D$} называется
+            \begin{defenition}
+                \textbf{Средним значением функции $f$ в плоскости $D$} называется
+            \end{defenition}
 		
 		$$ <f> = {1 \over S(D)} \iint_D f(x,y) dxdy $$
 		
@@ -306,7 +332,260 @@
 		$$ \iint_d f(x,y)g(x,y) dxdy = f(M_0) \iint_d g(x,y) dxdy $$
 		
 	\end{enumerate}
-	
+
 	\underline{Замечание} Свойство (8) является частным случаем свойства (9) для $g(x,y) = 1$
-	
+ 
+    \section{Повторный интеграл}
+
+    \begin{defenition} 
+        Повторным интегралом называется выражение $ \int_a^b dx \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) dy $, значение $I_\text{повт}$ которого определяется правилом $ I_\text{повт} = \int_a^b F(x) dx $, где $F(x) = \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) dy$, $x \in [a,b], x = \text{const}$
+    \end{defenition}
+
+    Вычислить 
+    $$
+    I_\text{повт} = \int_1^{\ln(2)} dx \int_1^{1 \over x} x e^{xy} dy
+    $$
+
+    $$
+    \text{a)} F(x) = \int_1^{1 \over x} xe^{xy} dy = e^{xy} | _{y = 1}^{y = \frac{1}{x}} = e - e^x
+    $$
+
+    $$
+    \text{б)} I_\text{повт} = \int_1^{\ln(2)} F(x) dx = \int_1^{\ln(2)} (e - e^x)dx = e(\ln(2) - 1) - e^x |_1^{\ln(2)} = e \ln(2) - 2
+    $$
+
+    \section{Вычисление двойного интеграла}
+
+    \begin{defenition}
+        Область $D$ на плоскости $Oxy$ называется $y$ - прав., если любая прямая, параллельная $Oy$, пересекает границу $D$ не более, чем в двух точках, либо содержит участок границы области $D$ целиком
+    \end{defenition}
+
+    \begin{note}
+        \begin{enumerate}
+            \item $y$-прав. можно задать в следующем виде:
+            $$
+                D = \{ (x,y) : a \le x \le b, \phi_1(x) \le y \le \phi)2(x) \}
+            $$
+
+        \item $x$ - прав. определеяется аналогично
+        \end{enumerate}
+    \end{note}
+
+    \begin{theorem}
+        Пусть 
+
+        \begin{enumerate}
+            \item $\exists \iint_D f(x,y) dxdy = I$
+            \item $D$ является $y$-прав. и задается соотношением (*)
+            \item $\forall x \in [a;b] \exists \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) dy = F(x)$
+        \end{enumerate}
+
+        Тогда 
+
+        \begin{enumerate}
+            \item $\exists$ повторный интеграл
+
+                $$
+                \int^b_a \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) = I_\text{повт}
+                $$
+
+            \item $I = I_\text{повт}$
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{note}
+        Если область $D$ не является правильной в направлении какой-нибудь из координатных осей, то ее можно разбить на правильные части и воспользоваться свойством аддитивности двойного интеграла
+    \end{note}
+
+    \section{Замена переменных в двойном интеграле}
+
+    Пусть 
+
+    \begin{enumerate}
+        \item $I = \iint _{D_{xy}} f(x,y) dxdy$
+        \item $\Phi : D_{uv} \to D_{xy}$
+
+            $$
+            \Phi : \begin{cases}
+                x = x(u,v) \\
+                y = y(u,v)
+            \end{cases}
+            $$
+    \end{enumerate}
+
+    \begin{theorem}
+        О замене переменных в двойном инетеграле
+
+        Пусть
+
+        \begin{enumerate}
+            \item $D_{xy} = \Phi(D_{uv})$
+            \item $\Phi$ биективно
+            \item $\Phi$ непрерывна и непрерывано дифф. в $D_{uv}$
+            \item $I_\Phi \ne 0$ в $D_{uv}$, где 
+               % $$
+                    %I_\Phi = \left| \begin{matix} x'_u & x'_v \\ y'_u & y'_v \end{matrix} \right|
+               % $$
+            \item $f$ - интегрируема в $D_{xy}$
+        \end{enumerate}
+        
+        Тогда
+
+        \begin{enumerate}
+            \item $f(x(u,v), y(u,v)) |I_\Phi (u,v)|$ - истина в $D_{uv}$
+            \item $\iint_{D_{xy}} f(x,y) dxdy = \iint_{D_{uv}} f(x(u,v), y(y,v)) \cdot |I_\Phi (u,v)| dudv$
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{note}
+        \begin{enumerate}
+            \item Теорема остается справедливой и в том случае, если условия 2,3,4 нарушаются в отдельных точках области $D_{uv}$ или вдоль отдельных кривых, лежащих в $D_{uv}$ и имеющих площадь нуль
+        \end{enumerate}
+    \end{note}
+
+    \section{Приложения двойного инетграла}
+
+    \begin{enumerate}
+        \item[I.] \textbf{Вычисление площади плоской фигуры}
+
+        $$
+            S(D) = \iint_D 1 dx dy
+        $$
+
+        \item[II.] \textbf{Вычисление массы пластины}
+
+            Пусть 
+            \begin{enumerate}
+                \item[1)] Пластина занимает обалсть $D$ на плоскости $Oxy$
+                \item[2)] $f(x,y)$ - значение плотности материала пластины
+            \end{enumerate}
+
+            Тогда масса пластины
+
+            $$
+            M = \iint_D f(x,y) dxdy
+            $$
+
+        \item[III.] \textbf{Вычисление оъема тела}
+
+            Пусть
+
+            \begin{enumerate}
+                \item[1)] Тело $T$: $T = \{ (x,y,z): (x,y) \in D_{xy}, z_1(x,y) \le z \le z_2(x,y) \}$
+            \end{enumerate}
+
+            Тогда объем тела $T$ можно найти по формуле
+
+            $$
+            V(T) = \iint_{D_{xy}} \big[ z_2(x,y) - z_1(x,y) \big] dxdy
+            $$
+
+    \end{enumerate}
+
+    \chapter{Тройной интеграл}
+
+    \section{Понятие кубируемой области}
+
+    Рассмотрим область $G \subseteq R^3$
+
+    Как ввести понятие объема тела, которое занимает эту область? Понятие объема легко ввести для параллелепипеда или, более общо, многогранника в $R^3$. Что делать, если $G \subseteq R^3$ - произвольная область?
+
+    \begin{enumerate}
+        \item Рассмотрим множество многогранников $q$, целиком содеожащихся в $G$, и обозначим 
+
+            $$
+            V_* = \underset{q}{\text{sup}} V(q)
+            $$
+
+        \item Рассмотрим множество многогранников $Q$, целико содержащих в себе $G$, и обозначим 
+
+            $$
+            V^* = \underset{Q}{inf} V(Q)
+            $$
+    \end{enumerate}
+
+    \begin{defenition}
+        Трехмерная область $G$ называется кубируемой, если $\exists$ конечные значения $V_*, V^*$, причем $V_* = V^*$. При этом значение $V = V_* = V^*$ называется бъемом области $G$
+    \end{defenition}
+
+    \begin{defenition}
+        Говорят, что множество точек в $R^3$ имеет объем нуль, если все точки этого множества можно заключить в многогранник сколь угодно малого объема.
+    \end{defenition}
+
+    \section{Задача о вычислении массы тела}
+
+    Пусть 
+
+    \begin{enumerate}
+        \item Тело $T$ занимает область $G \subset R^3$
+        \item $f(x,y,z) \geq 0$ - значение плотности материала этого тела в точке $(x,y,z)$
+    \end{enumerate}
+
+    Требуется: Найти массу $m(T)$ тела $T$
+
+    \begin{enumerate}
+        \item Разобьем область $G$ на части:
+
+            $$
+            G = U_{i=1}^{n} G_i,\ \text{int }G_i \cap \text{int } G_j = 0, \text{ при } i \ne j
+            $$
+
+        \item В пределах кажддой из подобластей выберем отмеченную точку $M_i \in G_i,\ i = \overline{1;n}$
+
+        \item Считая, что размеры $G_i$ малы:
+
+            $$
+            \Delta m_i = m(G_i) \approx f(M_i) \Delta V_i, \text{ где } \Delta V_i = V(G_i)
+            $$
+
+            масса тела, занимающего подобласть $G_i$
+
+        \item Масса тела $T$ тогда:
+
+            $$
+            m(T) = \sum_{i=1}^n \Delta m_i \approx \sum_{i=1}^n f(M_i) \Delta V_i
+            $$
+
+        \item Эта формула тем точнее, чем меньше размеры $G_i$, поэтому естественно перейти к пределу:
+
+            $$
+            m(T) = \underset{ \underset{i}{\text{max}}\text{ diam} \to 0 }{\lim} \sum_{i=1}^n f(M_i) \Delta V_i
+            $$
+    \end{enumerate}
+
+    \section{Определение тройного интеграла}
+
+    Пусть 
+
+    \begin{enumerate}
+        \item $G \subseteq R^3$ - тело
+        \item $f:G \to R$ - функция
+    \end{enumerate}
+
+    Разоьем область $G$ на части так, как это было сделано в задаче о вычислении массы тела
+
+    Обозначим: $R = \{G_1,...,G_n\}$ - разбиение тела $G$
+
+    \begin{defenition}
+        Диаметром разбиения $R$ тела $G$ называется число
+
+        $$
+        d(R) = \underset{i = \overline{1;n}}{\text{max diam }} G_i
+        $$
+    \end{defenition}
+
+    \begin{defenition}
+        Тройным интегралом по функции $f(x,y,z)$ по области $G$ называется число 
+
+        $$
+        \iiint_G f(x,y,z) dxdydz = \lim_{d(R) \to 0} \sum_{i=1}^n f(M_i) \Delta V_i
+        $$
+
+        , где $M_i, \Delta V_i$ имееют тот же смысл, что и в задаче о вычислении массы тела
+    \end{defenition}
+
+    \begin{note}
+        Если указанный в определении тройного интеграла предел $\exists$ и конечен, то функция $f$ называется интегрируемой в области 
+    \end{note}
+
 \end{document}

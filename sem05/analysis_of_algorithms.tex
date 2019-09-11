@@ -1,0 +1,84 @@
+\documentclass[a4paper, 14pt]{report}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage[left=30mm, top=20mm, right=20mm, bottom=20mm, nohead, nofoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+\usepackage{wasysym}
+
+\usepackage{pgfplots}
+
+\author{Ульянов Михаил Васильевич}
+\title{Анализ алгоритмов}
+\date{2019}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+    \clearpage
+
+    \chapter{Исторический очерк}
+
+    \begin{enumerate}
+        \item \textbf{1900} \newline
+            Д. Гильберт - 23 проблемы
+            1931 - К. Гедель доказал теорему о неполноте
+        \item \textbf{1936} \newline
+            А.Тьюринг, Э.Л.Пост - Теория алгоритмов (начало)
+        \begin{enumerate}
+            \item[-] формализация понятия
+            \item[-] общие свойства
+            \item[-] обнаружение алгоритмически неразрешимых задач
+        \end{enumerate}
+        \item \textbf{1960е} \newline
+            Теория сложности вычислений NPC \newline
+            $O(n^2)\ O(n \cdot \ln(n))$
+
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel = {$n$},
+                    minor tick num = 10,
+                    domain=0:10,
+                    legend pos = north west,
+                    grid = major,
+                    line width = 1
+                ]
+                    \legend{
+                        $n^2$,
+                        $n \cdot \ln(n)$
+                    };
+
+                    \addplot[blue] {x^2};
+                    \addplot[orange] {x*ln(x)};
+                \end{axis}
+            \end{tikzpicture}
+
+        \item \textbf{Начало 1970х} \newline
+            Практический анализ алгоритмов Д.Э. Кнут
+    \end{enumerate}
+
+    \chapter{Схема выбора алгоритмического обеспечения}
+
+    Нет:
+
+    \begin{enumerate}
+        \item[A.] Новый (метод разработки)
+        \item[B.] Комбинированные элементы ($A_1 + A_2 + A_3$)
+    \end{enumerate}
+
+    $$ Q(q_1,...,q_m) = \sum \alpha_i q_i \to R^1 \text{ - комплексные оценки}$$
+
+    $$
+    \begin{cases}
+        a_{11} x_1 + a_{12} x_2 = b_1 \\
+        a_{21} x_1 + a_{22} x_2 = b_2
+    \end{cases}
+    $$
+
+    $$ a + ib = (c + id) = ^{det} (ac - bd) + i (bc + ad) $$
+\end{document}

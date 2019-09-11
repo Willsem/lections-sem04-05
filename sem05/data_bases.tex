@@ -1,0 +1,208 @@
+\documentclass[a4paper, 14pt]{report}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage[left=30mm, top=20mm, right=20mm, bottom=20mm, nohead, nofoot]{geometry}
+
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+\usepackage{wasysym}
+
+\usepackage{pgfplots}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+
+\usepackage[most]{tcolorbox}
+\newtcolorbox{lbox}[2][] {
+    enhanced,
+    %fonttitle=\ttfamily,
+    %fontupper=\ttfamily,
+    sharp corners,
+    colback=white,
+    colbacktitle=white,
+    coltitle=black,
+    boxed title style={colframe=white},
+    attach boxed title to top center={yshift=-3mm},
+    title=#2,#1
+}
+
+\author{Гаврилова Юлия Михайловна}
+\title{Базы данных}
+\date{2019}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+    \clearpage
+
+    \chapter{Введение}
+
+    \begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{Способы организации} \\
+        \hline
+        \textbf{OLAP} (online analytic processor) & \textbf{OLTP} (jnline transaction processor) \\
+        \hline
+        Время отклика & Быстрая вставка \\
+        \hline
+        3NF & 1NF \\
+        \hline
+        Нормальная форма & Для сбора статистики \\
+        \hline
+    \end{tabular}
+    \end{center}
+
+    \begin{tikzpicture}
+        \graph[nodes={align=center,rectangle,draw=black}, grow down sep, branch right sep]
+        {
+            SQL -> "Reluationnaya model" ->
+            {
+                "Teoria mnozestv",
+                "Teoria predikatov"
+            }
+        };
+    \end{tikzpicture}
+
+    \hfill
+
+    \begin{tikzpicture}
+        \graph[nodes={align=center,rectangle,draw=black}, grow down sep, branch right sep]
+        {
+            SYBD -> BD
+        };
+    \end{tikzpicture}
+
+    \section{Реляционная модель}
+
+    \begin{enumerate}
+        \item Стректурная часть: как построена модель
+        \item Целостная часть: какие ограничения, как должны быть организованы данные
+        \item Манипуляционная: обработка данных
+    \end{enumerate}
+
+    \subsection{Структурная часть}
+
+    \begin{itemize}
+        \item Тип int, char
+        \item домен - надстройка над типом, набор ограничений/правил (положительные четные для int), можно объявить над типом или над доменом
+        \item атрибут - упорядоченная пара (<имя, тип или домен>)
+        \item заголовок (схема) отношения - множество всех пар атрибутов \{<имя атрибута$_1$, значение$_1$>,$\dots$, <имя атрибута$_N$, значение$_N$>\}
+
+            \{<$a_1$, int>,<$a_2$, float>,<$a_3$, char>,<$a_4$, varchar>\}
+        \item кортеж над схемой
+
+            \{<$a_1$, 1>,<$a_2$, 1.4>,<$a_3$, 'a'>,<$a_4$, 'aaa'>\}
+        \item отношение
+
+            \begin{tabular}{|c|c|c|c|}
+                \hline
+                $a_1$ & $a_2$ & $a_3$ & $a_4$ \\
+                \hline
+                1 & 1.4 & 'a' & 'aaa' \\
+                \hline
+            \end{tabular}
+    \end{itemize}
+
+
+    \paragraph{ER-модель}
+
+    \begin{itemize}
+        \item отношение/сущность
+
+            \begin{tikzpicture}
+                \graph[nodes={align=center,rectangle,draw=black}, grow down sep, branch right sep]
+                {
+                    students -> "second name",
+                    students -> "group",
+                    students -> tails,
+                    students -> number
+                };
+            \end{tikzpicture}
+    \end{itemize}
+
+    Здесь студент сущность сильная. Если студент зависит, то студент - слабая сущность
+
+    \begin{itemize}
+        \item связь 1 - 1 (Студент $\to$ зачетка)
+        \item связь 1 ко многим (Студенты $\to$ группа)
+        \item многие ко многим (Студенты $\to$ курс)
+    \end{itemize}
+
+    \begin{lbox}{\textbf{Лабораторная работа 1}}
+        \begin{itemize}
+            \item Подобрать предметную область на весь семестр
+            \item ER модель (не менее 3ч самостоятельных сущностей)
+            \item Создать свою БД (не менее 1000 записей на таблицу)
+        \end{itemize}
+        \textbf{Защита:}
+        \begin{itemize}
+            \item Добавить связь/атрибут
+            \item Создать ссылку
+        \end{itemize}
+    \end{lbox}
+
+    \subsection{Целостная часть}
+
+    \begin{itemize}
+        \item целостность сущностей/отношений
+        \item целостность ссылок
+
+            \begin{tabular}{|c|c|c|}
+                \hline
+                id & ФИО & Age \\
+                \hline
+                1 & Иванов & 10 \\
+                \hline
+                2 & Петров & 15 \\
+                \hline
+                3 & Иванов & 45 \\
+                \hline
+            \end{tabular}
+    \end{itemize}
+
+    Потенциальный ключ:
+
+    \begin{itemize}
+        \item однозначная идентификация записи
+        \item никаких подмножеств не должно быть под ключом
+    \end{itemize}
+
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            id & ФИО & id группы \\
+            \hline
+            1 & Петров & 1 \\
+            \hline
+            & & \\
+            \hline
+        \end{tabular}
+
+        $\downarrow$ Внешняя ссылка
+
+        \begin{tabular}{|c|c|}
+            \hline
+            id & Название \\
+            \hline
+            1 & ИУ7-53 \\
+            \hline
+            & \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    Ссылочная целостность - нельзя ссылаться на несуществующий объект
+
+    \subsection{Манипуляционная часть}
+
+    \begin{itemize}
+        \item Реляционная алгебра
+        \item Реляционные исчисления
+    \end{itemize}
+
+\end{document}

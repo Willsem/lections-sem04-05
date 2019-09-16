@@ -206,4 +206,294 @@
         \item Реляционные исчисления
     \end{itemize}
 
+    \section{Реляционная алгебра}
+
+    \begin{tabular}{|c|c|}
+        \hline
+        id & name \\
+        \hline
+        1 & a \\
+        \hline
+        2 & b \\
+        \hline
+    \end{tabular}
+
+    \hfill
+
+    \begin{tabular}{|c|c|}
+        \hline
+        id & name \\
+        \hline
+        2 & b \\
+        \hline
+        3 & c \\
+        \hline
+    \end{tabular}
+
+    \begin{enumerate}
+        \item Традиционные - работа с множеством
+
+            \begin{itemize}
+                \item Объединение (UNION)
+
+                    \begin{tabular}{|c|c|}
+                        \hline
+                        id & name \\
+                        \hline
+                        1 & a \\
+                        \hline
+                        2 & b \\
+                        \hline
+                        3 & c \\
+                        \hline
+                    \end{tabular}
+
+                \item Пересечение (INTERSECT)
+
+                    \begin{tabular}{|c|c|}
+                        \hline
+                        id & name \\
+                        \hline
+                        2 & b \\
+                        \hline
+                    \end{tabular}
+
+                \item Вычитание (MINUS)
+
+                    \begin{tabular}{|c|c|}
+                        \hline
+                        id & name \\
+                        \hline
+                        1 & a \\
+                        \hline 
+                    \end{tabular}
+
+                    \begin{tabular}{|c|c|}
+                        \hline
+                        id & name \\
+                        \hline
+                        3 & c \\
+                        \hline 
+                    \end{tabular}
+
+                \item Декартово произведение (TIMES) - все возможные комбинации атрибутов
+            \end{itemize}
+
+        \item Специальные
+
+            \begin{itemize}
+                \item Соединение (JOIN)
+
+                    \begin{tabular}{|c|c|c|}
+                        \hline
+                        id & name1 & name2\\
+                        \hline
+                        2 & b & b \\
+                        \hline
+                    \end{tabular}
+
+                \item Ограничение (WHERE)
+                \item Проекция (PROJECT)
+                \item Деление (DIVIDE BY)
+            \end{itemize}
+    \end{enumerate}
+
+    Реляционное выражение = унарное выражение (бинарное выражение)
+
+    \paragraph{Унарные выражения}
+
+    \begin{itemize}
+        \item Проекция
+
+            терм | терм[список атрибутов]
+
+        \item Ограничение
+
+            терм WHERE логическое\_выражение
+
+        \item Переименование
+
+            терм RENAME old\_name TO new\_name
+
+    \end{itemize}
+
+    терм - имя\_отношения | (реляционное\_выражение)
+
+    \paragraph{Бинарные выражения}
+
+    \begin{itemize}
+        \item Объединение
+        \item Пересечение
+        \item Вычитание
+        \item Декартово произведение
+        \item Соединение
+    \end{itemize}
+
+    бинарные операции = проекция бинарная\_операция реляцонное\_выажение
+
+    S JOIN P[P..,S..]
+
+    \begin{tabular}{|c|}
+        \hline
+        Поставщик \\
+        \hline
+        S \\
+        \hline
+    \end{tabular}
+
+    $ \downarrow $ Многие ко многим SP
+
+    \begin{tabular}{|c|}
+        \hline
+        Детали \\
+        \hline
+        P \\
+        \hline
+    \end{tabular}
+
+    \hfill
+
+    $S(Sno : integer, Sname : string, Status : integer, City : string)$
+
+    $P(Pno : integer, Pname : string, Color : string, Weight : real, City : string)$
+
+    $SP(Sno : integer, Pno : integer, Quantity : integer)$
+
+    \paragraph{S}
+
+    \hfill
+
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Sno & Sname & Status & City \\
+        \hline
+        1 & Алмаз & 20 & Смоленск \\
+        2 & Дельта & 10 & Владимир \\
+        3 & Орион & 30 & Смоленск \\
+        \hline
+    \end{tabular}
+
+    \paragraph{P}
+
+    \hfill
+
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Pno & Pname & Color & Weight & City \\
+        \hline
+        1 & Гайка & К & 12.0 & Смоленск \\
+        2 & Болт & С & 17.1 & Рязань \\
+        3 & Винт & З & 15.47 & Владимир \\
+        4 & Винт & К & 18 & Москва \\
+        5 & Шайба & З & 25 & Смоленск \\
+        \hline
+    \end{tabular}
+
+    \paragraph{SP}
+
+    \hfill
+
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Sno & Pno & Quantity \\
+        \hline
+        1 & 1 & 25 \\
+        1 & 2 & 14 \\
+        2 & 4 & 2 \\
+        \hline
+    \end{tabular}
+
+    \begin{enumerate}
+        \item Имена всех поставщиков детали под номером 2
+
+            $$
+            \underbrace{((\underbrace{\text{SP join S})}_\text{рел. выр.} \text{where} \underbrace{\text{Pno = 2}}_{\text{лог. выр.}})}_\text{реляционное выражение}[\text{Sname}]
+            $$
+
+            select Sname
+
+            from SP inner join S on SP.Sno = S.Sno
+
+            where SP.Pno = 2
+
+        \item Вывести все имена поставщиков, которые поставляюк как минимум одну красную деталь
+
+            $$
+            (((\text{P where } \text{Color = 'К'}) \text{join SP}) \text{join S})[\text{Sname}]
+            $$
+
+        \item Получить имена поставщиков, которые поставляют все детали
+
+            $A(X_1, \dots, X_n, Y_1, \dots, Y_n)$
+
+            $B(Y_1, \dots, Y_n)$
+
+            $A \text{ divide by } B = (X_1, \dots, X_n)$
+
+            \begin{tabular}{|c|c|}
+                \hline
+                Sno & Pno \\
+                \hline
+                1 & 1 \\
+                1 & 2 \\
+                1 & 3 \\
+                2 & 2 \\
+                2 & 3 \\
+                3 & 1 \\
+                \hline
+            \end{tabular}
+
+            $P[Pno]$
+
+            $SP \text{ divide by } P[Pno]$
+
+            $((SP \text{ divide by } P[Pno]) \text{ join } S)[Sname]$
+
+        \item Все поставщики, которые поставляют только красные детали
+
+            $(Sp \text{divide by }(P \text{ where } \text{Color = 'К'})[Pno])[Sname]$
+
+        \item Переименовать города из первой таблицы во вторые
+
+            $(S \text{ rename } Sno \text{ to } firstName)[firstName, City] \text{ join }$
+            
+            $(S \text{ rename } Sno \text{ to } secondName)[secondName, City]) \text{ where } secondName > firstName \text{ join } S$
+
+            \begin{tabular}{|c|c|}
+                \hline
+                firstName & C \\
+                \hline
+                1 & С \\
+                2 & В \\
+                3 & С \\
+                \hline
+            \end{tabular}
+
+            \begin{tabular}{|c|c|}
+                \hline
+                secondName & C \\
+                \hline
+                1 & С \\
+                2 & В \\
+                3 & С \\
+                \hline
+            \end{tabular}
+
+            \begin{tabular}{|c|c|c|}
+                \hline
+                firstName & secondName & C \\
+                \hline
+                1 & 1 & С \\
+                1 & 3 & С \\
+                2 & 2 & В \\
+                3 & 1 & С \\
+                3 & 3 & С \\
+                \hline
+            \end{tabular}
+
+        \item Поставщики, которые не поставляют деталь номер 2
+
+            $((S[Sno] \text{ minus } (SP \text{ where } Pno=2)[Sno]) \text{ join } S)[Sname]$
+
+    \end{enumerate}
 \end{document}

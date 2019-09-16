@@ -82,4 +82,111 @@
     $$
 
     $$ a + ib = (c + id) = ^{det} (ac - bd) + i (bc + ad) $$
+
+    \chapter{1936 год Э.Л. Пост "Финитные комбинаторные процессы - формулировка 1"}
+
+    \section{Терминология}
+
+    Общая проблема = задача
+
+    Конкретная проблема = индивидуальная задача
+
+    \section{Общая проблема}
+
+    Общая $\to$ множество всех конкретных
+
+    Решение общей $\to$ решение каждой конкретной
+
+    \section{Пространство символов}
+
+    \begin{tabular}{c|c|c|c|c|c|c|c}
+        \hline
+        $\leftarrow$ & & & & & & & $\to$ \\
+        \hline
+    \end{tabular}
+
+    \hfill
+
+    \begin{tabular}{c|c|c}
+        \hline
+        & Помечен, не помечен & \\
+        \hline
+    \end{tabular}
+
+    \hfill
+
+    Конкретная проблема задается внешней силой путем пометки конечного числа символов.
+
+    \section{Работник (процессор)}
+
+    \begin{enumerate}
+        \item $\to$  (R)
+        \item $\leftarrow$ (L)
+        \item $\checkmark$ Поставить метку, если пусто
+        \item $\xi$ Стереть, если есть
+        \item ? $\begin{matrix}
+                \overset{\text{да}}{\to} N^o \text{ строки} \\
+                \overset{\text{нет}}{\to} N^o \text{ строки} \\
+                \end{matrix}$
+        \item stop
+    \end{enumerate}
+
+    \section{Примеры}
+
+    \begin{tabular}{c|c|c|c|c|c|c|c}
+        \hline
+        & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & ... & $\checkmark$ &  \\
+        \hline
+    \end{tabular}
+
+    \begin{enumerate}
+        \item $\xi$
+        \item $\to$
+        \item ? $\begin{matrix}
+                \overset{\text{да}}{\to} 1 \\
+                \overset{\text{нет}}{\to} 4 \\
+                \end{matrix}$
+        \item stop
+    \end{enumerate}
+
+    \section{Гипотеза Поста}
+
+    \begin{enumerate}
+        \item[a)] Программа применима к общей, если $\forall$ конкретной нет коллизий в операциях 3,4
+        \item[b)] программа заканчивается, если stop
+        \item[c)] Если $\forall$ конкретной внеш сила распознает правильный ответ, то Ф1П есть 1-решение общей
+        \item[d)] Мы вправе рассматривать все более и более широкие формулы
+
+            $$
+                \begin{array}{l}
+                \text{пространство символов} \\
+                \text{алфавита} \\
+                \text{набор инструкций} \\
+                \end{array}
+            \text{логически сводимы к формуле 1}
+            $$
+    \end{enumerate}
+
+    a + b = Финитный 1 процесс
+
+    \section{1984 Муравей Лэнгтона}
+    \begin{tabular}{c|c|c|c|c|c|c}
+        & & & & & & \\
+        \hline
+        & & $\blacksquare$ & $\blacksquare$ & & & \\
+        \hline
+        & & $\blacksquare$ & & $\blacksquare$ & & \\
+        \hline
+        & & & $\blacksquare$ & $\blacksquare$ & & \\
+        \hline
+        & & & & & & \\
+    \end{tabular}
+
+    $$
+    W \to (B,R)
+    $$
+
+    $$
+    B \to (W,L)
+    $$
 \end{document}

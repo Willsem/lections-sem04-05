@@ -589,4 +589,332 @@
         Если указанный в определении тройного интеграла предел $\exists$ и конечен, то функция $f$ называется интегрируемой в области 
     \end{note}
 
+    \subsection{Свойства тройного интеграла}
+
+    Эти свойства полностью аналогичны свойствам 1 - 9 двойного интеграла; при их записи нужно вместо $f(x,y) \mapsto f(x,y,z)$, $\iint_D f(x,y) dxdy \mapsto \iiint_G f(x,y,z) dxdydz$ $D \mapsto G$.
+
+    \section{Вычисление тройного интеграла}
+
+    Основная идея - сведение к повторному интегралу
+
+    \begin{defenition}
+        Область $G \subseteq R^3$ называется z-правильной, если любая прямая, параллельная $Oz$, пересекает границу $G$ не более чем в двух точках или содержит участок границы целиком.
+    \end{defenition}
+
+    z-правильная область $G$ можно задать в виде:
+
+    $$
+    G = \{ (x,y,z) : (x,y) \in D_{xy}, z_1(x,y) \le z \le Z_2(x,y) \}
+    $$
+
+    \begin{theorem}
+        Пусть
+
+        \begin{enumerate}
+            \item $\exists \iiint_G f(x,y,z) dxdydz$
+            \item $G$ является z-прав и задается (*)
+            \item Для каждой фиксированной точки $(x,y) \in D_{xy}$
+        \end{enumerate}
+
+        $$
+        \exists \int_{z_1(x,y)}^{z_2(x,y)} f(x,y,z) dz = F(x,y)
+        $$
+
+        Тогда 
+
+        \begin{enumerate}
+            \item $\exists$ повторный интеграл
+
+                $$
+                I_\text{повт} = \iint_{D_{xy}} F(x,y) dxdy = \iint_{D_{xy}} dxdy \int_{z_1(x,y)}^{z_2(x,y)} f(x,y,z) dz
+                $$
+
+            \item и $I_\text{повт} = I$
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{note}
+        Если в условии * сформулированной теоремы область $D_{xy}$ является y-правильной и задается в виде:
+
+        $$
+        D_{xy} = \{ (x,y): a \le x \le b, \phi_1(x) \le y \le \phi_2(x) \}
+        $$
+
+        то
+
+        $$
+        \iiint_G f(x,y,z) dxdyd = \int_a^bdx \int_{\phi_1(x)}^{\phi_2(x)} dy \int_{z_1(x,y)}^{z_2(x,y)} f(x,y,z) dz
+        $$
+    \end{note}
+
+    \section{Замена переменных в тройном итеграле}
+
+    \begin{theorem}
+        Пусть
+
+        \begin{enumerate}
+            \item $G_{xyz} = \Phi(G_{uv\omega})$
+            \item $\Phi: G_{uv\omega} \to G_{xyz}$
+
+                $$
+                \Phi : 
+                \begin{cases}
+                    x = x(u, v, \omega) \\
+                    y = y(u, v, \omega) \\
+                    z = z(u, v, \omega) \\
+                \end{cases}
+                $$
+
+            \item Отображение $\Phi$ биективно
+            \item $\Phi$ непрерывно и непрырывно дифференцируемо в $G_{uv\omega}$
+            \item 
+                $$
+                J_\Phi(u,v,\omega) = \left|
+                \begin{matrix}
+                    x'_u & x'_v & x'_\omega \\
+                    y'_u & y'_v & y'_\omega \\
+                    z'_u & z'_v & z'_\omega \\
+                \end{matrix}
+                \right| \ne 0
+                $$
+            \item $f(x,y,z)$ интегрируема в $G_{xyz}$
+        \end{enumerate}
+
+        Тогда
+
+        $$
+        \iiint_{G_{xyz}} f(x,y,z)dxdydz = \iiint_{G_{uv\omega}} f(x(u,v,\omega), y(u,v,\omega), z(u,v,\omega)) |J_\Phi(u,v,\omega)| dudvd\omega
+        $$
+    \end{theorem}
+
+    \subsection{Связь цилиндрической и декартовой СК}
+
+    $$
+    \begin{cases}
+        x = \rho \cos(\phi) \\
+        y = \rho \sin(\phi) \\
+        z = z \\
+    \end{cases}
+    $$
+
+    $$
+    J_\text{цил} = \left|
+    \begin{matrix}
+        \cos(\phi) & -\rho \sin(\phi) & 0 \\
+        \sin(\phi) & \rho \cos(\phi) & 0 \\
+        0 & 0 & 1
+    \end{matrix}
+    \right| = \rho
+    $$
+
+    \subsection{Связь сферической и декартовой СК}
+
+    $$
+    \begin{cases}
+        x = r \cos(\Theta) \cos(\phi) \\
+        y = r \cos(\Theta) \sin(\phi) \\
+        z = r \sin(\Theta) \\
+    \end{cases}
+    $$
+
+    $$
+    |J_\text{сф}| = \dots = r^2 \cos(\Theta)
+    $$
+
+    \chapter{Определения вероятности}
+
+    \section{Случайный эксперимент}
+
+    \begin{defenition}
+        Случайным называется эксперимент, результат которого невозможно предсказать.
+    \end{defenition}
+
+    \begin{enumerate}
+        \item Подброс монетки
+
+            $$
+            \Omega = \{ \text{Г}, \text{Р}\}
+            $$
+
+            $$
+            |\Omega| = 2
+            $$
+
+        \item Бросают игральную кость
+
+            $$
+            \Omega = \{ 1, 2, 3, 4, 5, 6 \}
+            $$
+
+            $$
+            |\Omega| = 6
+            $$
+
+        \item Бросают монету до первого появления герба
+
+            $$
+            \Omega = \{ 1, 2, 3, \dots \}
+            $$
+
+            $$
+            |\Omega| = \aleph_0
+            $$
+
+            Омега является счетным множеством, т.е. в нем столько же элементов, сколько существует натуральных чисел.
+
+        \item Производят стрельбу по плоской мишени размеры которой 1м x 1м (координаты - точки попадания)
+
+            $$
+            \Omega = \{ (x,y) : |x| \le \frac{1}{2}; |y| \le \frac{1}{2} \}
+            $$
+
+            $$
+            |\Omega| = c
+            $$
+
+            Омега имеет можность континуума
+    \end{enumerate}
+
+    \begin{defenition}
+        Множество $\Omega$ всех исходов данного случайного эксперимента называется пространством элементов исхода
+    \end{defenition}
+
+    \begin{note}
+        При рассматривании пространства элементов исходов предполагается, что
+        \begin{enumerate}
+            \item Каждый элемент исхода неделим, т.е. не может быть "разложен" на более мелкие исходы
+            \item В результате случайного эксперимента всегда происходит ровно один элемент исхода из $\Omega$
+        \end{enumerate}
+    \end{note}
+
+    \begin{defenition}
+        (Нестрогое) Событием называется (любое) подмножество множества $\Omega$
+    \end{defenition}
+
+    \begin{defenition}
+        Говорят, что в результате случайного эксперимента происходит событие $A$, если в результате этого эксперимента произошел один из входящих в $A$ элементов исхода.
+    \end{defenition}
+
+    Бросают игральную кость
+
+    $$
+    \Omega = \{ 1,2,3,4,5,6 \}
+    $$
+
+    $$
+    A = \{2,4,6\}
+    $$
+
+    Если выпало 2 очко, то наступило $A$
+
+    \begin{defenition}
+        Событие $A$ называется следствием события $B$, если наступление события $B$ влечет наступление события $A$, т.е. $B \subseteq A$
+    \end{defenition}
+
+    \begin{note}
+        Любое множество $\Omega$ содержит в качестве подмножеств $\emptyset$ и $\Omega$ соответствующие события называются невозможным ($\emptyset$) и достоверным ($\Omega$). Оба этих события называют несобственными. Все остальные события называют собственными.
+    \end{note}
+
+    В урне находится 2 красных и 3 синих шара. Из урны извлекают 1 шар
+
+    $$
+    A = \{ \text{извлеченный шар - зеленый} \} = \emptyset
+    $$
+
+    $$
+    B = \{ \text{извлеченный шар - красный или синий} \} = \Omega
+    $$
+
+    \section{Операции над событиями}
+
+    События - множества (подмножества множества $\Omega$) $\Rightarrow$ $\cup, \cap, \overline{a}, \backslash, \Delta$ 
+
+    \begin{defenition}
+        Суммой событий $A,B \subseteq \Omega$ называют событие
+
+        $$
+        A + B = A \cup B
+        $$
+    \end{defenition}
+
+    \begin{defenition}
+        Произведением событий $A,B \subseteq \Omega$ называют событие
+
+        $$
+        A \cdot B = A \cap B
+        $$
+    \end{defenition}
+
+    \begin{defenition}
+        $A \backslash B$ называется разностью событий $A$ и $B$
+    \end{defenition}
+
+    \begin{defenition}
+        $\overline{A}$ называется событием, противоположным $A$
+    \end{defenition}
+
+    \subsection{Свойства операций над событиями}
+
+    Смотреть теоретико-множеств. тождества (осно.)
+
+    \begin{defenition}
+        События $A,B \in \Omega$ называются несовместными, если $AB = \emptyset$. В противоположном случае события $A$ и $B$ называются совместными.
+    \end{defenition}
+
+    \begin{defenition}
+        События $A_1, \dots, A_n, \dots$ называются попарнонесовместимимы, если $A_i A_j = \emptyset, i \ne j$ - несовместимыми в совокупности $A_1 \cdot \dots \cdot A_n = \emptyset$
+    \end{defenition}
+
+    \section{Классическое определение вероятности}
+
+    Пусть
+
+    \begin{enumerate}
+        \item $|\Omega| = N < \infty$
+        \item по условиям сложности эксперимента нет оснований предпочесть тот или иной исход остальных (в этом случае говорят, что все элементы исхода равновозможны)
+        \item $A \subseteq \Omega,\ |A| = N_A$
+    \end{enumerate}
+
+    \begin{defenition}
+        Вероятностью осуществления события $A$ называют число
+
+        $$
+        P(A) = \frac{N_A}{N}
+        $$
+    \end{defenition}
+
+    2 раза бросают игральную кость
+
+    $$
+    A = \{ \text{сумма выпавших очков} \}
+    $$
+
+    $$
+    P(A) = ?
+    $$
+
+    Решение:
+
+    Исход: $(x_1, x_2)$, где $x_i$ - количество выпавших при $i$-м броске
+
+    $$
+    \Omega = \{ (1,1), (1,2), \dots, (6,6) \}
+    $$
+
+    $$
+    |\Omega| = 36 = N
+    $$
+    
+    $$
+    A = \{ (5,6), (6,5), (6,6) \}
+    $$
+
+    $$
+    N_A = |A| = 3 \\
+    $$
+
+    $$
+    P(A) = \frac{N_A}{N} = \frac{3}{36} = \frac{1}{12}
+    $$
+
 \end{document}

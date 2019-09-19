@@ -20,6 +20,8 @@
 \usepackage{tikz}
 \usetikzlibrary{graphs}
 
+\usepackage{multirow}
+
 \usepackage[most]{tcolorbox}
 \newtcolorbox{lbox}[2][] {
     enhanced,
@@ -272,17 +274,29 @@ UNIX сразу писалась как система времени. POSIX (po
     \item Непрозрачные - строго к низлежащему уровню
 \end{itemize}
 
-\begin{table}
-    \caption{Структура ядра ОС UNIX 4.4 BSD}
-    \begin{center}
-        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-            \hline
-            \multicolumn{2}{|c|}{Системные вызовы} & Аппаратные и эмулированные прерывания & Системные вызовы & \multicolumn{2}{|c|}{Аппаратные и эмулированные прерывания} \\
-            \hline
+\hfill
 
-        \end{tabular}
-\end{center}
+\hfill
+
+\begin{table}[]
+\caption{Структура ядра ОС UNIX 4.4 BSD}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{Системные вызовы} & //////////// & Сис. выз. & \multicolumn{2}{c|}{/////////////////} \\ \hline
+\multicolumn{2}{|c|}{\begin{tabular}[c]{@{}c@{}}Управление\\ терминалом\end{tabular}} & 1 & 2 & 3 & 4 & Сокеты & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Обработка\\ сигналов\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Создание и\\ завершение\\ процесса\end{tabular}} \\ \cline{1-7}
+\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Необра-\\ ботан-\\ ный\\ телетайп\end{tabular}} & \begin{tabular}[c]{@{}c@{}}Обработанный\\ телетайп\end{tabular} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Файловая\\ система\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Виртуальная\\ память\end{tabular}} & \begin{tabular}[c]{@{}c@{}}Сетевые\\ протоколы\end{tabular} &  &  \\ \cline{2-9} 
+ & \begin{tabular}[c]{@{}c@{}}Дисциплины\\ линий\\ связи\end{tabular} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Буферный\\ КЭШ\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Страничный\\ КЭШ\end{tabular}} & \begin{tabular}[c]{@{}c@{}}Маршру-\\ тизация\end{tabular} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Планирование\\ процессов\end{tabular}} \\ \hline
+\multicolumn{2}{|c|}{\begin{tabular}[c]{@{}c@{}}Драйверы символьных\\ устройств\end{tabular}} & \multicolumn{4}{c|}{\begin{tabular}[c]{@{}c@{}}Драйверы блочных\\ устройств\end{tabular}} & \begin{tabular}[c]{@{}c@{}}Сетевые\\ устрйства\end{tabular} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Диенетгеризация\\ процессов\end{tabular}} \\ \hline
+\end{tabular}
 \end{table}
+
+\begin{enumerate}
+    \item[1-] Символьный уровень
+    \item[2-] Именование файлов
+    \item[3-] Отображение адреса
+    \item[4-] Страничные прерывания
+    \item[///-] Аппаратные и эмулируемые прерывания
+\end{enumerate}
 
 \section{Управление процессорами}
 

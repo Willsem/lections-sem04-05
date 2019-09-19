@@ -339,7 +339,7 @@
     \section{Повторный интеграл}
 
     \begin{defenition} 
-        Повторным интегралом называется выражение $ \int_a^b dx \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) dy $, значение $I_\text{повт}$ которого определяется правилом $ I_\text{повт} = \int_a^b F(x) dx $, где $F(x) = \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) dy$, $x \in [a,b], x = \text{const}$
+        Повторным интегралом называется выражение $ \int_a^b dx \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) dy $, значение $I_\text{повт}$ которого определяется правилом $ I_\text{повт} = \int_a^b F(x) dx $, где $F(x) = \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) dy$, $x \in [a,b], x = \text{const}$
     \end{defenition}
 
     Вычислить 
@@ -365,7 +365,7 @@
         \begin{enumerate}
             \item $y$-прав. можно задать в следующем виде:
             $$
-                D = \{ (x,y) : a \le x \le b, \phi_1(x) \le y \le \phi)2(x) \}
+                D = \{ (x,y) : a \le x \le b, \varphi_1(x) \le y \le \varphi)2(x) \}
             $$
 
         \item $x$ - прав. определеяется аналогично
@@ -378,7 +378,7 @@
         \begin{enumerate}
             \item $\exists \iint_D f(x,y) dxdy = I$
             \item $D$ является $y$-прав. и задается соотношением (*)
-            \item $\forall x \in [a;b] \exists \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) dy = F(x)$
+            \item $\forall x \in [a;b] \exists \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) dy = F(x)$
         \end{enumerate}
 
         Тогда 
@@ -387,7 +387,7 @@
             \item $\exists$ повторный интеграл
 
                 $$
-                \int^b_a \int_{\phi_1(x)}^{\phi_2(x)} f(x,y) = I_\text{повт}
+                \int^b_a \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) = I_\text{повт}
                 $$
 
             \item $I = I_\text{повт}$
@@ -404,10 +404,10 @@
 
     \begin{enumerate}
         \item $I = \iint _{D_{xy}} f(x,y) dxdy$
-        \item $\Phi : D_{uv} \to D_{xy}$
+        \item $\varphi : D_{uv} \to D_{xy}$
 
             $$
-            \Phi : \begin{cases}
+            \varphi : \begin{cases}
                 x = x(u,v) \\
                 y = y(u,v)
             \end{cases}
@@ -420,12 +420,12 @@
         Пусть
 
         \begin{enumerate}
-            \item $D_{xy} = \Phi(D_{uv})$
-            \item $\Phi$ биективно
-            \item $\Phi$ непрерывна и непрерывано дифф. в $D_{uv}$
-            \item $I_\Phi \ne 0$ в $D_{uv}$, где 
+            \item $D_{xy} = \varphi(D_{uv})$
+            \item $\varphi$ биективно
+            \item $\varphi$ непрерывна и непрерывано дифф. в $D_{uv}$
+            \item $I_\varphi \ne 0$ в $D_{uv}$, где 
                % $$
-                    %I_\Phi = \left| \begin{matix} x'_u & x'_v \\ y'_u & y'_v \end{matrix} \right|
+                    %I_\varphi = \left| \begin{matix} x'_u & x'_v \\ y'_u & y'_v \end{matrix} \right|
                % $$
             \item $f$ - интегрируема в $D_{xy}$
         \end{enumerate}
@@ -433,8 +433,8 @@
         Тогда
 
         \begin{enumerate}
-            \item $f(x(u,v), y(u,v)) |I_\Phi (u,v)|$ - истина в $D_{uv}$
-            \item $\iint_{D_{xy}} f(x,y) dxdy = \iint_{D_{uv}} f(x(u,v), y(y,v)) \cdot |I_\Phi (u,v)| dudv$
+            \item $f(x(u,v), y(u,v)) |I_\varphi (u,v)|$ - истина в $D_{uv}$
+            \item $\iint_{D_{xy}} f(x,y) dxdy = \iint_{D_{uv}} f(x(u,v), y(y,v)) \cdot |I_\varphi (u,v)| dudv$
         \end{enumerate}
     \end{theorem}
 
@@ -637,13 +637,13 @@
         Если в условии * сформулированной теоремы область $D_{xy}$ является y-правильной и задается в виде:
 
         $$
-        D_{xy} = \{ (x,y): a \le x \le b, \phi_1(x) \le y \le \phi_2(x) \}
+        D_{xy} = \{ (x,y): a \le x \le b, \varphi_1(x) \le y \le \varphi_2(x) \}
         $$
 
         то
 
         $$
-        \iiint_G f(x,y,z) dxdyd = \int_a^bdx \int_{\phi_1(x)}^{\phi_2(x)} dy \int_{z_1(x,y)}^{z_2(x,y)} f(x,y,z) dz
+        \iiint_G f(x,y,z) dxdyd = \int_a^bdx \int_{\varphi_1(x)}^{\varphi_2(x)} dy \int_{z_1(x,y)}^{z_2(x,y)} f(x,y,z) dz
         $$
     \end{note}
 
@@ -653,11 +653,11 @@
         Пусть
 
         \begin{enumerate}
-            \item $G_{xyz} = \Phi(G_{uv\omega})$
-            \item $\Phi: G_{uv\omega} \to G_{xyz}$
+            \item $G_{xyz} = \varphi(G_{uv\omega})$
+            \item $\varphi: G_{uv\omega} \to G_{xyz}$
 
                 $$
-                \Phi : 
+                \varphi : 
                 \begin{cases}
                     x = x(u, v, \omega) \\
                     y = y(u, v, \omega) \\
@@ -665,11 +665,11 @@
                 \end{cases}
                 $$
 
-            \item Отображение $\Phi$ биективно
-            \item $\Phi$ непрерывно и непрырывно дифференцируемо в $G_{uv\omega}$
+            \item Отображение $\varphi$ биективно
+            \item $\varphi$ непрерывно и непрырывно дифференцируемо в $G_{uv\omega}$
             \item 
                 $$
-                J_\Phi(u,v,\omega) = \left|
+                J_\varphi(u,v,\omega) = \left|
                 \begin{matrix}
                     x'_u & x'_v & x'_\omega \\
                     y'_u & y'_v & y'_\omega \\
@@ -683,7 +683,7 @@
         Тогда
 
         $$
-        \iiint_{G_{xyz}} f(x,y,z)dxdydz = \iiint_{G_{uv\omega}} f(x(u,v,\omega), y(u,v,\omega), z(u,v,\omega)) |J_\Phi(u,v,\omega)| dudvd\omega
+        \iiint_{G_{xyz}} f(x,y,z)dxdydz = \iiint_{G_{uv\omega}} f(x(u,v,\omega), y(u,v,\omega), z(u,v,\omega)) |J_\varphi(u,v,\omega)| dudvd\omega
         $$
     \end{theorem}
 
@@ -691,8 +691,8 @@
 
     $$
     \begin{cases}
-        x = \rho \cos(\phi) \\
-        y = \rho \sin(\phi) \\
+        x = \rho \cos(\varphi) \\
+        y = \rho \sin(\varphi) \\
         z = z \\
     \end{cases}
     $$
@@ -700,8 +700,8 @@
     $$
     J_\text{цил} = \left|
     \begin{matrix}
-        \cos(\phi) & -\rho \sin(\phi) & 0 \\
-        \sin(\phi) & \rho \cos(\phi) & 0 \\
+        \cos(\varphi) & -\rho \sin(\varphi) & 0 \\
+        \sin(\varphi) & \rho \cos(\varphi) & 0 \\
         0 & 0 & 1
     \end{matrix}
     \right| = \rho
@@ -711,8 +711,8 @@
 
     $$
     \begin{cases}
-        x = r \cos(\Theta) \cos(\phi) \\
-        y = r \cos(\Theta) \sin(\phi) \\
+        x = r \cos(\Theta) \cos(\varphi) \\
+        y = r \cos(\Theta) \sin(\varphi) \\
         z = r \sin(\Theta) \\
     \end{cases}
     $$

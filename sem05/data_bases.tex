@@ -269,7 +269,7 @@
                     id & name \\
                     \hline
                     1 & a \\
-                    \hline 
+                    \hline
                 \end{tabular}
 
                 \begin{tabular}{|c|c|}
@@ -277,7 +277,7 @@
                     id & name \\
                     \hline
                     3 & c \\
-                    \hline 
+                    \hline
                 \end{tabular}
 
             \item Декартово произведение (TIMES) - все возможные комбинации атрибутов
@@ -460,7 +460,7 @@ $SP(Sno : integer, Pno : integer, Quantity : integer)$
     \item Переименовать города из первой таблицы во вторые
 
         $(S \text{ rename } Sno \text{ to } firstName)[firstName, City] \text{ join }$
-        
+
         $(S \text{ rename } Sno \text{ to } secondName)[secondName, City]) \text{ where } secondName > firstName \text{ join } S$
 
         \begin{tabular}{|c|c|}
@@ -609,5 +609,167 @@ range of SY is (SX) where SX.City = 'Смоленск', (SX) where exists SPX(SP
 (sum(SPX.Qty) as Total)
 
 агрегатная функция((атрибуты) where f[атрибуты])
+
+\section{Исчисление доменов}
+
+R(pair, pair...) - условие принадлежности в общем виде
+
+R - имя отношения, pair = A:v, где A - атрибут отношения R, v - или переменная
+домена, или литерал
+
+SP(Sno : 1, Pno:1) - истина если есть кортеж с Sno = 1 и Pno = 1
+
+SP(Sno:SX, Pno:PX) - только если в отношении SP есть кортеж
+
+\begin{enumerate}
+    \item (SX) - множество всех номеров поставщиков
+    \item (SX) where S(Sno : SX) - множество всех номеров поставщиков в отношении S
+    \item (SX) where S(Sno : SX, City : 'Смоленск') - подмножество номеров поставщиков из города Смоленска
+    \item (SX,CityX) where S(Sno : SX, City : CityX) and SP(Sno : SX, Pno : 2) - запрос на получение номера поставщиков поставляющих деталь под номером 2
+    \item (SX, PX) where S(Sno : Sx, City : CityX) and P(Pno : PX, City : CityY) and CityX <> CityY - получение пар номер поставщика и детали где поставщики и детали находятся не в одном городе
+\end{enumerate}
+
+\begin{enumerate}
+    \item Получить номера поставщиков из Смоленска у которых статус больше 20
+
+        SX where exists StatusX (StatusX > 20 and S(Sno : SX, Status : StatusX, City : 'Смоленск'))
+    \item Получить все пары поставщиков, что два поставщика размещаются в одном городе
+
+        (SX as FirstSno, SY as SecondSnno) where exists CityZ(S(Sno : SX, City : CityZ) and S(Sno : SY, City : CityZ) and SX < SY)
+
+    \item Получить имена поставщиков которые поставляют как минимум одну красную деталь
+
+        NameX where exists SX exists PX (S(Sno : SY, Sname : NameX) and SP(Sno : SX, Pno : PX) and P(Pno : PX, Color = 'Красный'))
+
+    \item Получить имена поставщиков которые поставляют хотя бы одну деталь поставляемую поставщиком под номером 2
+
+        NameX where exists SX exists PX (S(Sno : SX, Sname : NameX) and SP(Sno : SX, Pno : PX) and SP(Sno : 2, Pno : PX))
+
+    \item Получить имена поставщиков которые поставляют все типы деталей
+
+        NameX where exists SX(S(Sno : SXm Sname : NameX) and forall PX(if P(Pno : PX) then (Sno : SX, Pno : PX)))
+
+    \item Получить имена поставщиков которые не поставляют деталь с номером 2
+
+        NameX where exists SX(S(Sno : SX, Sname : NameX) and not SP(Sno : SX, Pno : 2))
+
+    \item Получить номера поставщиков которые поставляют как минимум все типы деталей поставляемыми поставщиком с номером 2
+
+        SX where forall PX(if SP(Sno : 2, Pno : PX) then SP(Sno : SX, Pno : PX))
+
+    \item Получить номера деталей которые не весят больше 16 фунтов или поставляются с поставщиком под номером 2, или и то и другое
+
+        PX where exists WeightX(P(Pno : PX, WeightX) and WeightX > 16) or SP(Sno : 2, Pno : PX))
+\end{enumerate}
+
+Поставщики (S)
+
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    Sno & Sname & Status & City \\
+    \hline
+    1 & Алмаз & 20 & Смоленск\\
+    \hline
+    2 & Циклон & 10 & Владивосток \\
+    \hline
+    \vdots & & & \\
+\end{tabular}
+
+Детали (P)
+
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Pno & Pname & Color & Weight & City \\
+    \hline
+    1 & Гайка & Красный & 12 & Смоленск\\
+    \hline
+    2 & Болт & Зеленый & 17 & Владимир\\
+    \hline
+    $\vdots$ & & & & \\
+\end{tabular}
+
+Проекты (J)
+
+\begin{tabular}{|c|c|c|}
+    \hline
+    Jno & Jname & City \\
+    \hline
+    1 & Ангара & Владимир \\
+    \hline
+    2 & Алтай & Рязань \\
+    \hline
+    $\vdots$ & & \\
+\end{tabular}
+
+Поставки (SPJ)
+
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    Sno & Pno & Jno & Qty \\
+    \hline
+    1 & 1 & 1 & 200 \\
+    \hline
+    1 & 1 & 4 & 700 \\
+    \hline
+    $\vdots$ & & & \\
+\end{tabular}
+
+\begin{enumerate}
+    \item (SX,Name, SX.City) where exists JX forall PX exists PSJX (JX.City = 'Ярославль' and JX.Jno = SPJX.Jno and PX.Pno = SPJX.Pno and SX.Sno = SPJX and SPJX.Qty >= 50)
+
+SX : все кортежи отношения S (5 шт)
+
+PX : все кортежи отношения P (6 шт)
+
+JX : все кортежи отношения J, в которых City = 'Ярославль' (2шт)
+
+SPJX : все кортежи отношения SPJ, d которых Qty >= 50 (24 шт)
+
+    \item JX.JN = SPJX.Jno and PX.Pno = SPJX.Ono and SX.Xno = SPJX.Sno
+
+    \item exists RX, forall RX
+
+    \item exists JX forall PX exists SPJX
+
+\end{enumerate}
+
+\begin{enumerate}
+    \item exists SPJX исключая SPJ (SPJ.Sno, SPJ.Pno, SPJ.Jno и SPJ.Qty)
+
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            Sno & Sname & City & Pno & Pname & Color & weight & City & Jno & Jname & City \\
+            \hline
+                & & & & & & & & & & \\
+        \end{tabular}
+
+    \item forall PX Делим на P
+
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            Sno & Sname & Status & City & Jno & Jname & City \\
+            \hline
+                & & & & & & \\
+        \end{tabular}
+
+    \item exists JX исключаем J(J.Jno, J.Jname, J.City)
+
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            Sno & Sname & Status & City \\
+            \hline
+                & & & \\
+        \end{tabular}
+
+    \item[5.] SX.Sname, SX.City
+
+        \begin{tabular}{|c|c|}
+            \hline
+            Sname & City \\
+            \hline
+                  & \\
+        \end{tabular}
+\end{enumerate}
+
 
 \end{document}

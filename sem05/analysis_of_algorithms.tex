@@ -13,180 +13,322 @@
 
 \usepackage{pgfplots}
 
+\usepackage{listings}
+
+\lstset{
+    numbers=left,
+    frame=single,
+    texcl=true,
+    basicstyle=\ttfamily,
+    mathescape
+}
+
 \author{Ульянов Михаил Васильевич}
 \title{Анализ алгоритмов}
 \date{2019}
 
 \begin{document}
-    \maketitle
+\maketitle
 
-    \tableofcontents
-    \clearpage
+\tableofcontents
+\clearpage
 
-    \chapter{Исторический очерк}
+\chapter{Исторический очерк}
 
+\begin{enumerate}
+    \item \textbf{1900} \newline
+        Д. Гильберт - 23 проблемы
+        1931 - К. Гедель доказал теорему о неполноте
+    \item \textbf{1936} \newline
+        А.Тьюринг, Э.Л.Пост - Теория алгоритмов (начало)
     \begin{enumerate}
-        \item \textbf{1900} \newline
-            Д. Гильберт - 23 проблемы
-            1931 - К. Гедель доказал теорему о неполноте
-        \item \textbf{1936} \newline
-            А.Тьюринг, Э.Л.Пост - Теория алгоритмов (начало)
-        \begin{enumerate}
-            \item[-] формализация понятия
-            \item[-] общие свойства
-            \item[-] обнаружение алгоритмически неразрешимых задач
-        \end{enumerate}
-        \item \textbf{1960е} \newline
-            Теория сложности вычислений NPC \newline
-            $O(n^2)\ O(n \cdot \ln(n))$
-
-            \begin{tikzpicture}
-                \begin{axis}[
-                    xlabel = {$n$},
-                    minor tick num = 10,
-                    domain=0:10,
-                    legend pos = north west,
-                    grid = major,
-                    line width = 1
-                ]
-                    \legend{
-                        $n^2$,
-                        $n \cdot \ln(n)$
-                    };
-
-                    \addplot[blue] {x^2};
-                    \addplot[orange] {x*ln(x)};
-                \end{axis}
-            \end{tikzpicture}
-
-        \item \textbf{Начало 1970х} \newline
-            Практический анализ алгоритмов Д.Э. Кнут
+        \item[-] формализация понятия
+        \item[-] общие свойства
+        \item[-] обнаружение алгоритмически неразрешимых задач
     \end{enumerate}
+    \item \textbf{1960е} \newline
+        Теория сложности вычислений NPC \newline
+        $O(n^2)\ O(n \cdot \ln(n))$
 
-    \chapter{Схема выбора алгоритмического обеспечения}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel = {$n$},
+                minor tick num = 10,
+                domain=0:10,
+                legend pos = north west,
+                grid = major,
+                line width = 1
+            ]
+                \legend{
+                    $n^2$,
+                    $n \cdot \ln(n)$
+                };
 
-    Нет:
+                \addplot[blue] {x^2};
+                \addplot[orange] {x*ln(x)};
+            \end{axis}
+        \end{tikzpicture}
 
-    \begin{enumerate}
-        \item[A.] Новый (метод разработки)
-        \item[B.] Комбинированные элементы ($A_1 + A_2 + A_3$)
-    \end{enumerate}
+    \item \textbf{Начало 1970х} \newline
+        Практический анализ алгоритмов Д.Э. Кнут
+\end{enumerate}
 
-    $$ Q(q_1,...,q_m) = \sum \alpha_i q_i \to R^1 \text{ - комплексные оценки}$$
+\chapter{Схема выбора алгоритмического обеспечения}
 
-    $$
-    \begin{cases}
-        a_{11} x_1 + a_{12} x_2 = b_1 \\
-        a_{21} x_1 + a_{22} x_2 = b_2
-    \end{cases}
-    $$
+Нет:
 
-    $$ a + ib = (c + id) = ^{det} (ac - bd) + i (bc + ad) $$
+\begin{enumerate}
+    \item[A.] Новый (метод разработки)
+    \item[B.] Комбинированные элементы ($A_1 + A_2 + A_3$)
+\end{enumerate}
 
-    \chapter{1936 год Э.Л. Пост "Финитные комбинаторные процессы - формулировка 1"}
+$$ Q(q_1,...,q_m) = \sum \alpha_i q_i \to R^1 \text{ - комплексные оценки}$$
 
-    \section{Терминология}
+$$
+\begin{cases}
+    a_{11} x_1 + a_{12} x_2 = b_1 \\
+    a_{21} x_1 + a_{22} x_2 = b_2
+\end{cases}
+$$
 
-    Общая проблема = задача
+$$ a + ib = (c + id) = ^{det} (ac - bd) + i (bc + ad) $$
 
-    Конкретная проблема = индивидуальная задача
+\chapter{1936 год Э.Л. Пост "Финитные комбинаторные процессы - формулировка 1"}
 
-    \section{Общая проблема}
+\section{Терминология}
 
-    Общая $\to$ множество всех конкретных
+Общая проблема = задача
 
-    Решение общей $\to$ решение каждой конкретной
+Конкретная проблема = индивидуальная задача
 
-    \section{Пространство символов}
+\section{Общая проблема}
 
-    \begin{tabular}{c|c|c|c|c|c|c|c}
-        \hline
-        $\leftarrow$ & & & & & & & $\to$ \\
-        \hline
-    \end{tabular}
+Общая $\to$ множество всех конкретных
 
-    \hfill
+Решение общей $\to$ решение каждой конкретной
 
-    \begin{tabular}{c|c|c}
-        \hline
-        & Помечен, не помечен & \\
-        \hline
-    \end{tabular}
+\section{Пространство символов}
 
-    \hfill
+\begin{tabular}{c|c|c|c|c|c|c|c}
+    \hline
+    $\leftarrow$ & & & & & & & $\to$ \\
+    \hline
+\end{tabular}
 
-    Конкретная проблема задается внешней силой путем пометки конечного числа символов.
+\hfill
 
-    \section{Работник (процессор)}
+\begin{tabular}{c|c|c}
+    \hline
+    & Помечен, не помечен & \\
+    \hline
+\end{tabular}
 
-    \begin{enumerate}
-        \item $\to$  (R)
-        \item $\leftarrow$ (L)
-        \item $\checkmark$ Поставить метку, если пусто
-        \item $\xi$ Стереть, если есть
-        \item ? $\begin{matrix}
-                \overset{\text{да}}{\to} N^o \text{ строки} \\
-                \overset{\text{нет}}{\to} N^o \text{ строки} \\
-                \end{matrix}$
-        \item stop
-    \end{enumerate}
+\hfill
 
-    \section{Примеры}
+Конкретная проблема задается внешней силой путем пометки конечного числа символов.
 
-    \begin{tabular}{c|c|c|c|c|c|c|c}
-        \hline
-        & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & ... & $\checkmark$ &  \\
-        \hline
-    \end{tabular}
+\section{Работник (процессор)}
 
-    \begin{enumerate}
-        \item $\xi$
-        \item $\to$
-        \item ? $\begin{matrix}
-                \overset{\text{да}}{\to} 1 \\
-                \overset{\text{нет}}{\to} 4 \\
-                \end{matrix}$
-        \item stop
-    \end{enumerate}
+\begin{enumerate}
+    \item $\to$  (R)
+    \item $\leftarrow$ (L)
+    \item $\checkmark$ Поставить метку, если пусто
+    \item $\xi$ Стереть, если есть
+    \item ? $\begin{matrix}
+            \overset{\text{да}}{\to} N^o \text{ строки} \\
+            \overset{\text{нет}}{\to} N^o \text{ строки} \\
+            \end{matrix}$
+    \item stop
+\end{enumerate}
 
-    \section{Гипотеза Поста}
+\section{Примеры}
 
-    \begin{enumerate}
-        \item[a)] Программа применима к общей, если $\forall$ конкретной нет коллизий в операциях 3,4
-        \item[b)] программа заканчивается, если stop
-        \item[c)] Если $\forall$ конкретной внеш сила распознает правильный ответ, то Ф1П есть 1-решение общей
-        \item[d)] Мы вправе рассматривать все более и более широкие формулы
+\begin{tabular}{c|c|c|c|c|c|c|c}
+    \hline
+    & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & ... & $\checkmark$ &  \\
+    \hline
+\end{tabular}
 
-            $$
-                \begin{array}{l}
-                \text{пространство символов} \\
-                \text{алфавита} \\
-                \text{набор инструкций} \\
-                \end{array}
-            \text{логически сводимы к формуле 1}
-            $$
-    \end{enumerate}
+\begin{enumerate}
+    \item $\xi$
+    \item $\to$
+    \item ? $\begin{matrix}
+            \overset{\text{да}}{\to} 1 \\
+            \overset{\text{нет}}{\to} 4 \\
+            \end{matrix}$
+    \item stop
+\end{enumerate}
 
-    a + b = Финитный 1 процесс
+\section{Гипотеза Поста}
 
-    \section{1984 Муравей Лэнгтона}
-    \begin{tabular}{c|c|c|c|c|c|c}
-        & & & & & & \\
-        \hline
-        & & $\blacksquare$ & $\blacksquare$ & & & \\
-        \hline
-        & & $\blacksquare$ & & $\blacksquare$ & & \\
-        \hline
-        & & & $\blacksquare$ & $\blacksquare$ & & \\
-        \hline
-        & & & & & & \\
-    \end{tabular}
+\begin{enumerate}
+    \item[a)] Программа применима к общей, если $\forall$ конкретной нет коллизий в операциях 3,4
+    \item[b)] программа заканчивается, если stop
+    \item[c)] Если $\forall$ конкретной внеш сила распознает правильный ответ, то Ф1П есть 1-решение общей
+    \item[d)] Мы вправе рассматривать все более и более широкие формулы
 
-    $$
-    W \to (B,R)
-    $$
+        $$
+            \begin{array}{l}
+            \text{пространство символов} \\
+            \text{алфавита} \\
+            \text{набор инструкций} \\
+            \end{array}
+        \text{логически сводимы к формуле 1}
+        $$
+\end{enumerate}
 
-    $$
-    B \to (W,L)
-    $$
+a + b = Финитный 1 процесс
+
+\section{1984 Муравей Лэнгтона}
+\begin{tabular}{c|c|c|c|c|c|c}
+    & & & & & & \\
+    \hline
+    & & $\blacksquare$ & $\blacksquare$ & & & \\
+    \hline
+    & & $\blacksquare$ & & $\blacksquare$ & & \\
+    \hline
+    & & & $\blacksquare$ & $\blacksquare$ & & \\
+    \hline
+    & & & & & & \\
+\end{tabular}
+
+$$
+W \to (B,R)
+$$
+
+$$
+B \to (W,L)
+$$
+
+%
+%
+%
+%
+%
+%
+%
+% ПРОПУСК У АРТУРА
+%
+%
+%
+%
+%
+%
+
+\chapter{Терминология}
+
+\section{Вход алгоритма}
+
+Конкретная проблема $\Rightarrow$ индивидуальная задача $\Rightarrow$ Вход
+$D = \{ d_i | i = 1,m \}$
+
+\section{Длина входа}
+
+$n \to |D| ?$
+
+$$
+\mu_z (D) \to g(|D|)
+$$
+
+$$
+\mu_{sort} (D) = |D| - 1
+$$
+
+Умножение матриц $n \times n$
+
+$$
+|D| = 2n^2 + 1
+$$
+
+$$
+\mu_z(D) = n = \sqrt{\frac{|D| - 1}{2}}
+$$
+
+\section{Трудоемкость}
+
+$f_A(D)$ - число элементарных операций принятой модели вычислений заданных
+алгоритмом $A$ на входе $D$
+
+$$
+f_{A_1} (D) < F_{A_2} (D)
+$$
+
+\section{$D_n$}
+
+$$
+D_n = \{ D | \mu_z(D) = n \}
+$$
+
+$$
+\beta = 16\ \ |D_{10}| = 2^{160}
+$$
+
+\section{Переход к n}
+
+$$
+f_A^\vee(n) \overset{def}{=} \underset{D \in D_n}{min} f_A(D) \text{ - лучший случай}
+$$
+
+$$
+f_A^\wedge(n) \overset{def}{=} \underset{D \in D_m}{max} f_A(D) \text{ - худший случай}
+$$
+
+$$
+\overline{f}_A(n) = \sum_{D \in D_n} p(D) - f_A(D)
+$$
+
+$$
+p(D) = \frac{1}{|D_n}
+$$
+
+\section{Память}
+
+$$
+V(D) = \underset{\text{Вход}}{|D|} + \underset{\text{Результат}}{|R|} + V_\text{допольнительно памяти}(D) + V_\text{программы}
+$$
+
+$$
+V_A(D) = V_\text{доп}(D) | V^\vee(n), V^\vee(n), ...
+$$
+
+\chapter{Примеры}
+
+\section{Умножение матриц}
+
+\begin{lstlisting}
+MultM(A,B,n;C)
+    for i $\leftarrow$ 1 to n
+        for j $\leftarrow$ 1 to n
+            s $\leftarrow$ 0
+            for k $\leftarrow$ 1 to n
+                s $\leftarrow$ s + A[i,k] * B[k,j]
+            c[i,j] $\leftarrow$ s
+End
+\end{lstlisting}
+
+$$
+f^\vee_A(n) = f^\wedge_A(n)=f_A(n) = 1 + n (3 + 1 + n (3 + 2 + n (3 + 7) + 3)) =
+10 n^3 + 8n^2 + 4n + 1
+$$
+
+\section{Max}
+
+\begin{lstlisting}
+Max(A,n;M)
+    M $\leftarrow$ A[1]
+    for j $\leftarrow$ 2 to n
+        if M < A[i]
+            M $\leftarrow$ A[i]
+End
+\end{lstlisting}
+
+$$
+f^\vee_A(n) = 2 + 1 + (n-1) (3+2) = 5n - 2
+$$
+
+$$
+f^\wedge_A(n) = 2 + 1 + (n_1) (3+2+2) = 7n - 4
+$$
+
+
 \end{document}

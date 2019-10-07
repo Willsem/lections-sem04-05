@@ -11,7 +11,12 @@
 \usepackage{MnSymbol}
 \usepackage{wasysym}
 
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\DeclareGraphicsExtensions{.pdf}
+
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
 
 \usepackage{listings}
 
@@ -65,7 +70,7 @@
                 };
 
                 \addplot[blue] {x^2};
-                \addplot[orange] {x*ln(x)};
+                \addplot[orange] {3 + x*ln(x)};
             \end{axis}
         \end{tikzpicture}
 
@@ -330,5 +335,152 @@ $$
 f^\wedge_A(n) = 2 + 1 + (n_1) (3+2+2) = 7n - 4
 $$
 
+\section{Степень}
+
+\begin{lstlisting}
+Pow(x,k;y)
+    ...
+    y $\to$ 1
+    for j $\to$ 1 to k
+        y $\to$ y * x
+End
+\end{lstlisting}
+
+$$
+D \in D_2
+$$
+
+$$
+M_z(D) = 2
+$$
+
+$$
+f_A(k) = 2 + 5k
+$$
+
+$$
+e^x=e^{\lfloor x \rfloor} \cdot e^{\{x\}}
+$$
+
+$$
+e^\alpha = \sum^\infty \frac{\alpha^k}{k!}, 0 \le \alpha < 1,
+\frac{\alpha^k}{k!} > \sum_{k+1}^\infty (.)
+$$
+
+$$
+\text{Exp}(x,eps,y) \Rightarrow k^* = g(eps)\ \ k^* : \frac{\alpha^{k^*}}{k^*!}
+$$
+
+\chapter{Классификация алгоритмов по типу трудоемкости}
+
+\section{Класс N - количесвенно-зависимые алгоритмы}
+
+$$
+f_A(D) = f_A(\mu_Z(D)) = f_A (n)
+$$
+
+$$
+f^\vee = f^\wedge!
+$$
+
+!Матрично-векторные операции
+
+\begin{center}
+    \includegraphics[scale=0.5]{anal1}
+\end{center}
+
+Гипотеза П.Леви
+
+$$
+R^n\ \overline{a} = (..., [-1,1], ...)
+$$
+
+\section{Класс PR - параметрически-зависимые алгоритмы}
+
+$$
+f_A(D) = f_A(P+1,...,p+k) \ne f(n)
+$$
+
+$$
+li(x0) = \int_2^x \frac{1}{\ln x} dx
+$$
+
+\section{Класс NPR}
+
+$$
+f_A(D) = f_A(n, pr)
+$$
+
+\section{Декомпозиция f в NPR}
+
+$$
+f_A(D) = f_n(n) \underset{*}{+} g_{PR} (D)
+$$
+
+$$
+f^\wedge_A(n) = f_n(n) + g^\wedge_{PR}(n)
+$$
+
+
+\section{Асимптотическая иерархия функций}
+
+$$
+a < b
+$$
+
+$$
+f(x) \Rightarrow f(\cdot)
+$$
+
+$$
+f(x) \prec g(x)
+$$
+
+$$
+\prec : \lim_{x \to \infty} \frac{f(x)}{g(x)} = 0
+$$
+
+$$
+\ln x \prec \sqrt{x} \prec \underset{k > \frac{1}{2}}{x^k} \prec e^{\lambda x}
+\prec x^x
+$$
+
+$$
+f(x) \asymp g(x) \Rightarrow \lim_{x \to \infty \frac{f}{g} \ne 0}
+$$
+
+\section{Подклассы в NPR}
+
+$$
+f_A^\wedge (n) = f_n(n) + g^\wedge (n)
+$$
+
+\subsection{Подклассы NPR(Low)}
+
+$$
+g^\wedge(n) \prec f_n(n)
+$$
+
+\subsection{NPRE (Eq)}
+
+$$
+g^\wedge (n) \asymp f_n(n)
+$$
+
+\subsection{NPRH}
+
+$$
+f_n(n) \prec g^\wedge (n)
+$$
+
+$$
+!g^\wedge \to \overline{g}
+$$
+
+\subsection{TSP}
+
+\begin{center}
+    \includegraphics{anal2}
+\end{center}
 
 \end{document}

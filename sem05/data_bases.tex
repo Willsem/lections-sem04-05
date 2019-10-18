@@ -794,4 +794,253 @@ SPJX : все кортежи отношения SPJ, d которых Qty >= 50 
     \item При переходе к следующей НФ, свойства предыдущей сохраняются
 \end{enumerate}
 
+\paragraph{РК}
+
+\begin{enumerate}
+    \item ER модель
+    \item Рел. алг., МК, SQL
+    \item Функц. зависимости
+\end{enumerate}
+
+\paragraph{Доп задача на 3 балла}
+
+Есть столбец с id с числами. Нужно вычислить произведение SQL
+
+\section{Функциональная зависимость}
+
+$x \to y$
+
+\begin{tabular}{|c|c|c|}
+    \hline
+    Pno & Pname & Color \\
+    \hline
+        &       &       \\
+\end{tabular}
+
+
+Pno $\to$ Pname
+
+Pno $\to$ Color
+
+\subsection{Правила для функциональных зависимостей}
+
+\begin{enumerate}
+    \item $(B \subset A) \Rightarrow A \to B$
+    \item $A \to B \Rightarrow AC \to BC$
+    \item $A \to B \text{ и } B \to C \Rightarrow A \to C$
+    \item $A \to A$
+    \item $A \to BC \Rightarrow A \to B \text{ и } A \to C$
+    \item $A \to B \text{ и } A \to C \Rightarrow A \to BC$
+    \item $A \to B \text{ и } C \to B \Rightarrow AC \to BD$
+    \item $A \to B \text{ и } C \to D \Rightarrow A(C - B) \to BD$
+\end{enumerate}
+
+R -- переменная отношения
+
+R(A,B,C,D,E,F)
+
+S = $\{ A \to BC, B \to E, CD \to EF \}$ -- набор функциональных зависимостей
+
+$AD \to F ?$
+
+$\{AD\}^+$ -- замыкание атрибутов
+
+\begin{tabular}{|c|c|c|}
+    \hline
+    & Jold = Jnew = $\{ A,D \}$ & Jold=Jnew = $\{ A,B,C,D,E,F \}$\\
+    \hline
+    $A \to BC$ & $A,B,C,D$ & - -//- - \\
+    \hline
+    $B \to E$ & $A,B,C,D,E$ & - -//- - \\
+    \hline
+    $CD \to EF$ & $A,B,C,D,E,F$ = Jnew & - -//- - \\
+    \hline
+\end{tabular}
+
+\begin{enumerate}
+    \item $A \to BC \Rightarrow A \to B \text{ и } A \to C$
+    \item $AD \to CD$
+    \item $AD \to CD \text{ и } CD \to EF \Rightarrow AD \to EF$
+    \item $AD \to EF \Rightarrow AD \to E \text{ и } \underline{AD \to F }$
+\end{enumerate}
+
+\paragraph{}
+
+$$
+F =
+\left\{
+    \begin{matrix}
+        A \to C,  \\
+        AC \to D, \\
+        E \to AD, \\
+        E \to H   \\
+    \end{matrix}
+\right\}
+$$
+
+$$
+G =
+\left\{
+    \begin{matrix}
+        A \to CD, \\
+        E \to AH  \\
+    \end{matrix}
+\right\}
+$$
+
+$F?G$
+
+\begin{enumerate}
+    \item $\overbrace{\{A\}^+}^{\text{Детерминант } F} = \overbrace{\{A,C,D\}}^{\text{По } F} = A \to CD (\text{из } G)$
+
+        $\{AC\}^{-1} = \{A,C,D\} = A \to CD$
+
+        $\{E\}^+ = \{E,A,D,H,C\} = E \to AH (\text{из } G)$
+
+    \item $\{A\}^+ = \{A,C,D\} = AC \to D$
+
+        $\{E\}^+ = \{A,C,D,E,H\} = E \to AD \text{ и } E \to H$
+\end{enumerate}
+
+$F = G$
+
+\paragraph{Поиск минимального покрытия}
+
+$R(A,B,C,D)$
+
+$$
+S =
+\left\{
+    \begin{matrix}
+        A \to BC, \\
+        B \to C,  \\
+        A \to B,  \\
+        AB \to C, \\
+        AC \to D  \\
+    \end{matrix}
+\right\}
+$$
+
+\begin{itemize}
+    \item Справа 1 элемент
+    \item Нет транзитивных, тривиальных, выводимых зависимостей
+    \item Слева все детерминанты приведены к минимальному виду
+\end{itemize}
+
+$$
+\begin{matrix}
+    A  \to B   &                        \\
+    A  \to C   &  \text{транзитивность} \\
+    B  \to C   &                        \\
+    A  \to B   &  \text{дубль}          \\
+    AB \to C   &  \text{выводима}        \\
+    AC \to D   &                         \\
+\end{matrix}
+$$
+
+$$
+A \to B, B \to C, A \to D
+$$
+
+\section{Нормализация}
+
+\begin{itemize}
+    \item Избавление от аномалий
+
+        \begin{itemize}
+            \item обновление
+            \item удаление
+            \item вставка
+        \end{itemize}
+
+    \item Минимизировать объем данных
+\end{itemize}
+
+\subsection{Первая нормальная форма}
+
+\begin{itemize}
+    \item Атрибуты атамарны
+
+        \begin{tabular}{|c|c|c|}
+            \hline
+            ФИО & Город & Телефон \\
+            \hline
+            Иванов & Москва & 8-916-... \\
+                   &        & 8-925-... \\
+            \hline
+        \end{tabular}
+
+        \begin{tabular}{|c|c|c|}
+            \hline
+            ФИО & Город & Телефон \\
+            \hline
+            Иванов & Москва & 8-916-... \\
+            \hline
+            Иванов & Москва & 8-925-... \\
+            \hline
+        \end{tabular}
+
+        \includegraphics{db2}
+
+        \begin{tabular}{|c|c|}
+            \hline
+            ФИО & Город \\
+            \hline
+            Иванов & Москва \\
+            \hline
+        \end{tabular}
+
+        \begin{tabular}{|c|c|}
+            \hline
+            id & Номер \\
+            \hline
+            1 & 8-916-... \\
+            \hline
+            1 & 8-925-... \\
+            \hline
+        \end{tabular}
+
+\end{itemize}
+
+\subsection{Вторая нормальная форма}
+
+\begin{itemize}
+    \item 1NF
+    \item Каждый неключевой атрибут зависит от ключа
+
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            Код поставки & Город & Страна города & Код товара & Кол-во \\
+            \hline
+            1 & М & 20 & 1 & 300 \\
+            1 & М & 20 & 2 & 400 \\
+            1 & М & 20 & 3 & 100 \\
+            2 & Я & 10 & 4 & 200 \\
+            3 & С & 30 & 5 & 300 \\
+            3 & С & 30 & 6 & 400 \\
+            4 & П & 15 & 7 & 100 \\
+            \hline
+        \end{tabular}
+
+        \{КП, КТ\} $\to$ \{Кол-во\}
+
+        КП $\to$ Город
+
+        КП $\to$ Статус
+
+        Город $\to$ Статус
+
+        \begin{tabular}
+            \hline
+            КП & КТ & Кол-во
+            \hline
+            1 & 
+            1 & 
+            2 & 
+            3 & 
+            3 & 
+            4 & 
+        \end{tabular}
+\end{itemize}
+
 \end{document}

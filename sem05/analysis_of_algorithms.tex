@@ -483,4 +483,135 @@ $$
     \includegraphics{anal2}
 \end{center}
 
+\chapter{Метод классов эквивалентности}
+
+\section{Математические сведения}
+
+\begin{enumerate}
+    \item Отношение $R$ на $A$ $R \subset A \times A$
+    \item Если $R$ - отношения эквиваленстности:
+
+        \begin{enumerate}
+            \item $(a,a) \in R$ - рефлекс
+            \item $(a,a') \in R \Rightarrow (a',a) \in R$ - симметричность
+            \item $(a,a') \in R, (a', a'') \in R \Rightarrow (a,a'') \in R$ - транзитивность
+        \end{enumerate}
+
+    \item Принцип Дирихле P.G.L. Dirichle
+\end{enumerate}
+
+\section{Идея метода}
+
+\includegraphics{anal3}
+
+$$
+D_n \underset{A}{\to} F_n
+$$
+
+$$
+f^\vee(n)
+$$
+
+$$
+\exists D : f(D) = f^\vee + 1
+$$
+
+$$
+R \text{ на } D_n (D,D') \in R \Leftrightarrow f_A(D) = f_A(D')
+$$
+
+$$
+f^\vee, f^\wedge P(f(D) = f_1) = \frac{|D_{f_1}|}{|D_n|}
+$$
+
+$$
+\overline{f_A}(n) = \sum_k f_k \cdot P(f = f_K)
+$$
+
+\subsection{Реализация}
+
+\begin{enumerate}
+    \item Равномощное разбиение
+    \item Объединение в классы
+\end{enumerate}
+
+\section{Сортировка 3х чисел по методу}
+
+\begin{lstlisting}
+Sort3(a,b,c) $\leftarrow D_3$
+    if a > b
+        then a $\substack{\leftarrow}^\rightarrow$ b
+    if b > c
+        then b $\substack{\leftarrow}^\rightarrow$ c
+    if a > b
+        then a $\substack{\leftarrow}^\rightarrow$ b
+End
+\end{lstlisting}
+
+\begin{tabular}{ccccc}
+    $a,b,c$  & &           & $f$ & $f^\vee$ \\
+    \hline
+    1 - min  & & $D_{123}$ & 3   & \\
+    2 - midl & & $D_{132}$ & 6   & \\
+    3 - max  & $\Rightarrow$ & $D_{213}$ & 6   & $\overline{f} = 7 \frac{1}{2}$\\
+             & & $D_{231}$ & 9   & \\
+             & & $D_{312}$ & 9   & \\
+             & & $D_{321}$ & 12  & \\
+\end{tabular}
+
+\subsection{Модификация}
+
+\includegraphics{anal4}
+
+\begin{tabular}{ccc}
+              & $f^\vee$ & \\
+    \hline
+    $D_{123}$ & 2        & \\
+    $D_{132}$ & 6        & \\
+    $D_{213}$ & 6        & $\overline{f} = 5 \frac{1}{2}$\\
+    $D_{231}$ & 7        & \\
+    $D_{312}$ & 7        & \\
+    $D_{321}$ & 5        & \\
+\end{tabular}
+
+\section{Анализ max}
+
+\begin{lstlisting}
+M $\leftarrow$ A[1]
+for j $\leftarrow$ 2 to n
+    if M < A[j]
+        then M $\leftarrow$ A[j]
+\end{lstlisting}
+
+$$
+D_4 \to n = 4
+$$
+
+\begin{tabular}{ccc}
+    1 - min  & 2 1 3 4 qqqq\\
+    2 - min2 & 2 1 4 3 \\
+    3 - max2 & 2 3 1 4 \\
+    4 - max  & 2 3 4 1 \\
+\end{tabular}
+
+$$
+g_n(x) = x^{\overline{n}}
+$$
+
+$$
+g_4(x) = x(x+1)(x+2)(x+3)
+$$
+
+$$
+g_4(1) = 24
+$$
+
+$$
+g_4(x) = 1 \cdot x^4 + 6 \cdot x^3 + 11 \cdot x^2 + 6 \cdot x
+$$
+
+$$
+S_n^k
+$$
+
 \end{document}

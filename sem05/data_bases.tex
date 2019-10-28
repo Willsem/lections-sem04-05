@@ -10,6 +10,7 @@
 \usepackage{amsmath}
 \usepackage{MnSymbol}
 \usepackage{wasysym}
+\usepackage{float}
 
 \usepackage{pgfplots}
 
@@ -1030,17 +1031,128 @@ $$
 
         Город $\to$ Статус
 
-        \begin{tabular}
-            \hline
-            КП & КТ & Кол-во
-            \hline
-            1 & 
-            1 & 
-            2 & 
-            3 & 
-            3 & 
-            4 & 
-        \end{tabular}
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                КП & КТ & Кол-во \\
+                \hline
+                1 & & \\
+                1 & & \\
+                2 & & \\
+                3 & & \\
+                3 & & \\
+                4 & & \\
+                \hline
+            \end{tabular}
+        \end{table}
+        \end{itemize}
+
+\subsection{Третья нормальная форма}
+
+\begin{itemize}
+    \item 2НФ
+    \item Не должно быть транзитивных зависимостей
 \end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Сотрудник & Отдел & Номер телефона \\
+        \hline
+        Иванов & ИТ & 900 \\
+        Петров & ИТ & 900 \\
+        Сидоров & Бехгалтерия & 901 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\{Сотрудник\} $\to$ \{Отдел\}
+
+\{Сотрудник\} $\to$ \{Телефон\}
+
+\{Отдел\} $\to$ \{Телефон\}
+
+\subsection{НФ Бойса-Кодда}
+
+Каждая функциональная зависимость имеет в качестве своего детерминанта некий потенциальный ключ.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        № Корта & Начало & Конец & Тариф \\
+        \hline
+        1 & 9:00  & 10:30 & + \\
+        1 & 10:00 & 11:30 & + \\
+        1 & 11:00 & 12:30 & - \\
+        2 & 10:00 & 11:30 & + \\
+        2 & 11:00 & 12:30 & + \\
+        2 & 15:00 & 16:30 & - \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Потенциальные ключи:
+
+\begin{itemize}
+    \item \{№, начало\}
+    \item \{№, конец\}
+    \item \{Тариф, начало\}
+    \item \{Тариф, конец\}
+\end{itemize}
+
+$\Rightarrow$ \{№,\} $\to$ \{тариф\}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        № Корта & Начало & Конец \\
+        \hline
+        & & \\
+    \end{tabular}
+
+    \begin{tabular}{|c|c|}
+        \hline
+        № Корта & Тариф \\
+        \hline
+                & \\
+    \end{tabular}
+\end{table}
+
+\subsection{Четвертая нормальная форма}
+
+Отношение находится в четвертой нормальной форме тогда и только тогда, когда все
+нетривиальные многозадачные зависимости представляют собой функциональные зависимости
+от ее ключей.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Курс & Книга & Лектор \\
+        \hline
+        Инф & К1 & Иванов \\
+        Инф & К2 & Петров \\
+        Инф & К3 & Сидоров \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Пятая нормальная форма}
+
+Отношение находится в 5 НФ (проекционно-соед.) тогда и только тогда,
+когда каждая нетривиальная зависимость определяется потенциальным
+ключом этой зависимости.
+
+\section{Методы физического хранения данных на диске}
+
+Данные можно хранить построчно, тогда важна именно строка
+
+\subsection{MPP (GreenPlum)}
+
+
 
 \end{document}

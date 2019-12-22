@@ -4089,9 +4089,8 @@ $$
 \end{proof}
 
 \begin{note}
-    \begin{enunmerate}
+    \begin{enumerate}
     \item Пусть $f,g : R \to R$
-    \end{enunmerate}
 
     \begin{defenition}
         Сверточной функцией $f$ и $g$ называется функция
@@ -4106,6 +4105,358 @@ $$
     $$
     f*g = g*f
     $$
+    \end{enumerate}
+\end{note}
+
+\subsection{Математические ыожидания и дисперсия некоторой случайной величины}
+
+\begin{enumerate}
+    \item $X \sim B(n,p)$
+    \item $X \sim \Pi(\lambda)$
+    \item Геометрическое распределение. Пусть $X$ имеет геометрическое распределение с параметром $p \in (0;1)$, т.е. $P\{ X = k \} = pq^k, k = 0,1,2,...$
+
+        Тогда можно показать, что
+
+        $$
+        MX = \frac{q}{p}
+        $$
+
+        $$
+        DX = \frac{q}{p^2}
+        $$
+
+    \item Равномерно распределенная случайная величина
+
+        $$
+        X \sim R[a;b]
+        $$
+
+        $$
+        f(x) =
+        \begin{cases}
+            \frac{1}{b-a}, x \in [a,b] \\
+            0, \text{ иначе} \\
+        \end{cases}
+        k = 0,1,2,...
+        $$
+
+        $$
+        M[X] = \int_{-\infty}^{+\infty} xf(x)dx = \frac{a+b}{2}
+        $$
+
+        $$
+        DX = M \bigg[ (X -MX^2) \bigg] = \int_{-\infty}^{+\infty} (x - \frac{a+b}{2})^2 dx = \frac{(b-a)^2}{12}
+        $$
+
+    \item Экспоненциальное распределение
+
+        $$
+        X \sim Exp(\lambda)
+        $$
+
+        $$
+        f(x) =
+        \begin{cases}
+            \lambda e^{-\lambda x}, x > 0 \\
+            0, x < 0
+        \end{cases}
+        $$
+
+        $$
+        MX = \int_{-\infty}^{+\infty} xf(x)dx = ... = -\frac{1}{\lambda}
+        $$
+
+        $$
+        DX = M[X^2] - (MX)^2;
+        $$
+
+        $$
+        M[X^2] = \int_{-\infty}^{+\infty} x^2 f(x) dx = ... = \frac{2}{\lambda^2}
+        $$
+
+        Тогда
+
+        $$
+        DX = \frac{2}{\lambda^2} - \bigg( \frac{1}{\lambda} \bigg) = \frac{1}{\lambda^2}
+        $$
+
+    \item Нормальное распределение
+
+        $$
+        X \sim N(m, \sigma^2)
+        $$
+
+        $$
+        f(x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{(x-m)^2}{2\sigma^2}}, x \in R
+        $$
+
+        $$
+        MX = \int_{-\infty}^{+\infty} xf(x)dx = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{+\infty} x e^{-\frac{(x-m)^2}{2\sigma^2}}dx = ... = \frac{1}{\sqrt{2\pi}} \bigg[ \sigma \int_{-\infty}^{+\infty} t e^{-\frac{t^2}{2}}dt + m \int_{-\infty}^{+\infty} e^{-\frac{t^2}{2}}dt \bigg] =
+        $$
+
+        $$
+        = m \cdot \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-\frac{t^2}{2}} dt = m
+        $$
+
+        $$
+        DX = M[(X - MX)^2] = \int_{-\infty}^{+\infty} (x-m)^2 f(x) dx = \frac{1}{\sqrt{2\pi} \sigma} \int_{-\infty}^{+\infty} (x-m)^2 e^{-\frac{(x-m)^2}{2\sigma^2}} dx =
+        $$
+
+        $$
+        \frac{1}{\sqrt{2\pi}\sigma} \sigma \sigma^2 \int_{-\infty}^{+\infty} t^2 e^{-\frac{t^2}{2}} dt = ... = -\frac{\sigma^2}{\sqrt{2\pi}} \bigg[ t \cdot e^{-\frac{t^2}{2}}|_{-\infty}^{+\infty} - \int_{-\infty}^{+\infty} e^{-\frac{t^2}{2}}dt \bigg] = \sigma^2
+        $$
+
+        Таким образом если $X \sim N(m, \sigma^2)$, то $m=MX$, $\sigma^2 = DX$
+\end{enumerate}
+
+\subsection{Моменты}
+
+\begin{defenition}
+    Пусть $X$ - случайная величина
+
+    Моментом $k$-го порядка ($k$-м моментом, $k$-м начальным моментом) случайной величины $X$ называют число
+
+    $$
+    m_k = M[X^k], (k=1,2,...)
+    $$
+\end{defenition}
+
+\begin{defenition}
+    Центральным моментом $k$-го порядка случайной величины $X$ называют число
+
+    $$
+    \overset{o}{m_k} = M[(X-m)^k], (k=1,2,...)
+    $$
+    где $m=MX_0$
+\end{defenition}
+
+\begin{note}
+    \begin{enumerate}
+        \item если $X$ - дискретная случайная величина, то
+
+            $$
+            m_k = \sum_i p_ix_i^x
+            $$
+
+            $$
+            \overset{o}{m_k} = \sum_i p_i(x_i-m)^k
+            $$
+
+        \item если $X$ - непрерывная случайная величина, то
+
+            $$
+            m_k = \int_{-\infty}^{+\infty} x^k f(x) dx
+            $$
+
+            $$
+            \overset{o}{m_k} = \int_{-\infty}^{+\infty} (x-m)^k f(x) dx
+            $$
+
+        \item
+
+            $$
+            m_1 = MX
+            $$
+
+            $$
+            \overset{0}{m_2} = DX
+            $$
+
+            $$
+            \overset{0}{m_1} = 0
+            $$
+    \end{enumerate}
+\end{note}
+
+\subsection{Квантиль}
+
+\begin{defenition}
+    Пусть $X$ - случайаня величина, $\alpha \in (0;1)$
+
+    Квантилью уровня $\alpha$ случайной величины $X$ называется число $q_\alpha$, определяемое условиями
+
+    $$
+    P\{X<q_\alpha\} \le \alpha, P\{ X > q_\alpha \} \le 1 - \alpha
+    $$
+\end{defenition}
+
+\begin{note}
+    \begin{enumerate}
+    \item Если $X$ - непрерывная случайная величина, то $\forall \alpha \in (0;1)$ квантиль уровня $\alpha$ определена однозначно и является решением уравнения
+
+        $$
+        F_X(t) = \alpha
+        $$
+    \end{enumerate}
+\end{note}
+
+\begin{defenition}
+    Медианой случайной величины $X$ называется квантиль уровня $\frac{1}{2}$, то есть $q_{\frac{1}{2}}$
+\end{defenition}
+
+\begin{example}
+    Пусть $X \sim Exp(\lambda)$. Найти $q_\alpha$ и медиану.
+
+    $$
+    \int_{-\infty}^{q_\alpha} f(x) dx = \alpha \Leftrightarrow \lambda \int_0^{q_\alpha} e^{-\lambda x} dx = \alpha
+    $$
+
+    $$
+    \alpha = \lambda \int_{0}^{q_\alpha} e^{-\lambda x} dx = (1-e^{-\lambda q_\alpha})
+    $$
+
+    $$
+    \Rightarrow e^{-\lambda q_\alpha} = 1 - \alpha \Rightarrow q_\alpha = \frac{-\ln(1-\alpha)}{\lambda}
+    $$
+
+    Медиана:
+
+    $$
+    q_{\frac{1}{2}} = -\frac{\ln2}{\lambda}
+    $$
+\end{example}
+
+\subsection{Ковариация}
+
+До сих пор мы изучали числовые характеристики одномерного случайной величиной. Ковариация является характеристикой случайного вектора
+
+\begin{defenition}
+    Пусть $(X,Y)$ - двумерный случайный вектор
+
+    Ковариацией случайных величин $X$ и $Y$ называют число
+
+    $$
+    cov(X,Y) = M[(X-m_1)(Y-m_2)]
+    $$
+
+    где $m_1 = MX$, $m_2 = MY$
+\end{defenition}
+
+\begin{note}
+    \begin{enumerate}
+        \item если $(X,Y)$ - дискретный случайный вектор, то
+
+            $$
+            cov(X,Y) = \sum_i \sum_j p_{ij} (x_i - m_1)(y_j - m_2)
+            $$
+
+            где $p_{ij} = P\{ (X,Y) = (x_i, y_j) \}$
+
+        \item если $(X,Y)$ - непрерывный случайный вектор, то
+
+            $$
+            cov(X,Y) = \iint_{R^2} (x-m_1)(y-m_2)f(x,y)dxdy
+            $$
+
+            где $f(x,y)$ - совместная плотность распределения $X$ и $Y$
+    \end{enumerate}
+\end{note}
+
+\subsubsection{Свойства ковареляции}
+
+\begin{enumerate}
+    \item $D(X+Y) = DX + DY + 2cov(X,Y)$
+    \item $cov(X,X) = DX$
+    \item Если $X,Y$ - независимые, то $cov(X,Y) = 0$
+    \item $cov(a_1 X + a_2, b_1 Y + b_2) = a_1b_1 cov(X,Y)$
+    \item $|cov(X,Y)| \le \sqrt{DX \cdot DY}$, причем
+
+        $$
+        |cov(X,Y)| = \sqrt{DX \cdot DY} \Rightarrow
+        $$
+
+        $X,Y$ - связаны линейной зависимостью, то есть $Y=aX+b, a,b-=const$
+
+    \item $cov(X,Y) = M[XY] - (MX)\cdot(MY)$
+\end{enumerate}
+
+
+\begin{proof}
+    См. фото
+\end{proof}
+
+\begin{note}
+    \begin{enumerate}
+        \item Свойствов 1 с учетом 4 допускает обобщение
+
+            $$
+            D[aX+bY+c] = a^2 DX + b^2 DY + 2ab cov(X,Y)
+            $$
+
+        \item Рассмотрим свойство 5
+
+            Пусть $Y=aX+b$, тогда в соответствии со свойством 4
+
+            $$
+            cov(X,Y) = cov(X, aX+b) = a \cdot cov(X,X) = a DX
+            $$
+
+            Если $DX >0$, то знак $(cov(X,Y)) = \text{знак}(a)$
+
+            Таким образом, свойство 5 можно уточнить:
+
+            Если $Y = aX+b$, то
+
+            $$
+            cov(X,Y) =
+            \begin{cases}
+                \sqrt{DX \cdot DY}, \text{ если } a > 0 \\
+                -\sqrt{DX \cdot DY}, \text{ если } a < 0 \\
+            \end{cases}
+            $$
+    \end{enumerate}
+\end{note}
+
+\begin{defenition}
+    Случайные величины $X$ и $Y$ называются некоррелированными, если
+
+    $$
+    cov(X,Y) = 0
+    $$
+\end{defenition}
+
+\begin{note}
+    Из свойства 3 вытекает, что $X,Y$ - независимы $\Rightarrow$ $X,Y$ - некоррелированы. Обратное неверно.
+\end{note}
+
+\begin{note}
+    Недостатком ковариации является то, что она имеет размерность произведения случайных величин $X$ и $Y$. В то же самое время удобно иметь некоторую безразмерную характеристику.
+\end{note}
+
+\begin{defenition}
+    Коэффициентом корреляции случайных величин $X$ и $Y$ называется число
+
+    $$
+    \rho(X,Y) = \frac{cov(X,Y)}{\sqrt{DX \cdot DY}}
+    $$
+
+    (здесь предполагается, что $DX \cdot DY > 0$)
+\end{defenition}
+
+\subsubsection{Свойства коэффициента карреляции}
+
+\begin{enumerate}
+    \item $\rho(X,X) = 1$
+    \item Если $X,Y$ - независимые, то $\rho(X,Y) = 0$
+    \item $\rho(a_1X + a_2, b_1 Y + b_2) = \pm\rho(X,Y)$
+
+        где $+$, если $a_1a_2 > 0$, -, если $a_1 a_2 < 0$
+
+    \item $|\rho(X,Y)| \le 1$, причем $|\rho(X,Y) = 1| \Rightarrow$ $X$ и $Y$ связано линейной зависимостью $Y=aX+b$
+
+        При этом
+
+        $$
+        \rho(X,Y) =
+        \begin{cases}
+            1, \text{ если } a > 0 \\
+            -1, \text{ если } a< 0 \\
+        \end{cases}
+        $$
+\end{enumerate}
+
+\begin{note}
+    Коээфициент корреляции показывает степень линейной зависимости случайных величин $X$ и $Y$. Пусть проведено достаточно много экспериментов и все реализации вектора $(X,Y)$ изображены на плоскости. Чем ближе эти реализации группируются около некоторой прямой, тоем ближе $|\rho|$ к $1$. Если все эти значения лежат на одной прямой, то $|\rho| = 1$. При этом если соответствующая прямая имеет положительный угловой коэффициент, то $\rho > 0$ и $\rho \lesssim 1$. Если она имеет отрицательный угловой коэффициент, то $\rho < 0$ и $\rho \gtrsim -1$.
 \end{note}
 
 \end{document}

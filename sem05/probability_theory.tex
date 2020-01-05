@@ -4433,7 +4433,7 @@ $$
     (здесь предполагается, что $DX \cdot DY > 0$)
 \end{defenition}
 
-\subsubsection{Свойства коэффициента карреляции}
+\subsubsection{Свойства коэффициента корреляции}
 
 \begin{enumerate}
     \item $\rho(X,X) = 1$
@@ -4458,5 +4458,270 @@ $$
 \begin{note}
     Коээфициент корреляции показывает степень линейной зависимости случайных величин $X$ и $Y$. Пусть проведено достаточно много экспериментов и все реализации вектора $(X,Y)$ изображены на плоскости. Чем ближе эти реализации группируются около некоторой прямой, тоем ближе $|\rho|$ к $1$. Если все эти значения лежат на одной прямой, то $|\rho| = 1$. При этом если соответствующая прямая имеет положительный угловой коэффициент, то $\rho > 0$ и $\rho \lesssim 1$. Если она имеет отрицательный угловой коэффициент, то $\rho < 0$ и $\rho \gtrsim -1$.
 \end{note}
+
+\begin{defenition}
+    Пусть $\vec X = (X_1, ..., X_n)$ - $n$- мерный случайный вектор
+
+    Ковариацинной матрицей вектора $\vec X$ называется матрица
+
+    $$
+    \sum = (\sigma_{ij})_{ij=\overline{1;n}}
+    $$
+
+    где $\sigma_{ij} = cov(X_i, X_j)$
+\end{defenition}
+
+\begin{note}
+    \begin{enumerate}
+        \item $\sigma_{ii} = DX_, i = \overline{1;n}i$
+        \item $\sum^T = \sum$, так как $cov(X_i, X_j) = cov(X_j, X_i)$
+        \item Если $\vec Y = \vec X B + \vec C$
+
+            где $B \in M_{n,m}(R), \vec X = (X_1, ..., X_n), \vec Y + (Y_1, .., Y_m), \vec C = (C_1, ..., C_m), (B, \vec C - \text{ числовые матрицы})$, то
+
+            $$
+            \sum\ _{\vec Y} = B^T \sum\ _{\vec X} B
+            $$
+
+        \item Матрица $\sum$ является неотрицательно определенной (то есть соответствующая квадратичная форма является неотрицательно определенной), то есть
+
+            $$
+            \forall \vec x = (x_1, ..., x_n) \in R
+            $$
+
+            $$
+            f(\vec x) = \vec x \sum \vec x^T \geq 0
+            $$
+
+        \item Если все компоненты случайного вектора $\vec X$ попарно независимы, то его ковариационная матрица является диагональной, так как $cov(X_i, X_j) = 0$
+    \end{enumerate}
+\end{note}
+
+\begin{proof}
+    Без доказательства
+\end{proof}
+
+\begin{defenition}
+    Корреляционной матрицей вектора $\vec X$ называется матрица
+
+    $$
+    P = (\rho_{ij})_{ij = \overline{1;n}}
+    $$
+
+    где $\rho_{ij} = \rho(X_i, X_j)$
+\end{defenition}
+
+\section{Многомерное нормальное распределение}
+
+\subsection{Двумерное нормальное распределение}
+
+Рассмотрим
+
+\begin{enumerate}
+    \item $X_1 \sim N(m_1, \sigma_1^2)$
+    \item $X_2 \sim N(m_2, \sigma_2^2)$
+    \item $X_1, X_2$ - независимы
+\end{enumerate}
+
+Тогда
+
+$$
+F_{X_i} (x_i) = \frac{1}{\sqrt(2\pi)\sigma_i} e^{-\frac{(x_i-m_i)^2}{2 \sigma_i^2}}
+$$
+
+При этом функция плотности вектора $(X_1, X_2)$:
+
+$$
+f(x_1, x_2) = f_{X_1}(x_1)f_{X_2}(x_2) = \frac{1}{(\sqrt{2\pi})^2 \sigma_1 \sigma_2} e^{-\frac{1}{2} \big[ \frac{(x_1-m_1)^2}{\sigma_1^2} + \frac{(x_2-m_2)^2}{\sigma_2^2} \big]}
+$$
+
+Для вектора $(X_1,X_2)$:
+
+$\vec m = (m_1, m_2)$ явдяется вектором математических ожиданий,
+
+$$
+\sum =
+\left[
+    \begin{matrix}
+        \sigma_1^2 & 0 \\
+        0 & \sigma_2^2 \\
+    \end{matrix}
+\right]
+\text{ - ковариационная матрица}
+$$
+
+С учетом этих обозначений:
+
+$$
+f(x_1, x_2) = \frac{1}{(\sqrt{2\pi})^2 \sqrt{det} \sum} e^{-\frac{1}{2} (\vec x - \vec m) \tilde \sum (\vec x - \vec m)^T}
+$$
+
+где $\vec x = (x_1, x_2)$
+
+$$
+\tilde \sum = \sum\ ^{-1}
+$$
+
+Пусть теперь: $\sum$ - произвольная матрица 2-го порядка. Для того, чтобы $\sum$ была ковариационной матрицей некоторого случайного вектора, необходимо:
+
+\begin{enumerate}
+    \item $\sum$ была положительно (неотицательно) определена
+    \item $\sum\ ^T = \sum$
+\end{enumerate}
+
+Если
+
+$$
+\sum =
+\left[
+    \begin{matrix}
+        \sigma_{11} & \sigma_{12} \\
+        \sigma_{21} & \sigma_{22} \\
+    \end{matrix}
+\right]
+$$
+
+то эти условия имеют вид
+
+\begin{enumerate}
+    \item $\sigma_{11} \geq 0, \sigma_{11} \sigma_{22} - \sigma_{21} \sigma_{12} \geq 0$
+    \item $\sigma_{12} = \sigma_{21}$
+\end{enumerate}
+
+Наложим на $\sum$ несколько дополнительных ограничений
+
+\begin{enumerate}
+    \item Чтобы существовал $\sum\ ^{-1}$ необходимо и достаточно, чтобы $det \sum \ne 0$; с учетом сделанного выше допущения:
+
+        $$
+        det \sum > 0
+        $$
+
+        то есть $\sigma_{11}\sigma_{22} - \sigma_{12}^2 > 0$
+
+    \item Если $\sigma_{22} = 0$, то $DX_2 = 0 \Rightarrow X_2$ принимает единственное значение с вероятностью 1 (то есть $X_2$ не является случайной величиной) $\Rightarrow$ распределение $X_2$ - выроженное
+
+        По этой причине будем считать, что
+
+        $$
+        \sigma_{22} > 0
+        $$
+
+        Таком образом с учетом сделанных выше допущений матрица $\sum$ является положительно определенной
+\end{enumerate}
+
+\begin{defenition}
+    Говорят, что случайный вектор $(X_1, X_2)$ имеет невырожденное двумерное нормальное распределение, если его функция плотности имеет вид
+
+    $$
+    f(x_1, x_2) = ...
+    $$
+
+    где ...
+\end{defenition}
+
+\begin{note}
+    \begin{enumerate}
+        \item Можно показать, что в этом случае
+
+            $$
+            m_i = MX_i, i = \overline{1;2}
+            $$
+
+            $$
+            \sigma_{ii} = DX_i, i = \overline{1;2}
+            $$
+
+            $$
+            \sigma_{12} = cov(X_1, X_2)
+            $$
+
+        \item Таким образом двумерное нормальное распределение полностью задается 5-ю параметрами: $m_1, m_2, \sigma_{11}, \sigma_{22}, \sigma_{12}$
+    \end{enumerate}
+\end{note}
+
+\subsection{$n$-мерное нормально распределение}
+
+\begin{defenition}
+    Говорят, что случайный вектор $\vec X = (X_1, ..., X_n)$ имеет $n$-мерное нормальное распределение, если его плотности имеет вид:
+
+    $$
+    ...
+    $$
+    %%
+    %%
+    %%
+    %%
+\end{defenition}
+
+\begin{note}
+    Обозначается $\tilde X \sim N(\vec m, \sum)$
+\end{note}
+
+\subsubsection{Свойства $n$-мерного нормального распределения}
+
+\begin{enumerate}
+    \item Если $\tilde X \sim N(\vec m, \sum)$, то $\vec m$ - вектор ожиданий вектора $\vec X$, $\sum$ - ковариационная матрица
+
+    \item Если $\vec X \sim N(\vec m, \sum)$, то $X_i \sim N(m_i, \sigma_i^2), i = \overline{1;n}$, где $\sigma_i^2 = \sigma_{ii}$
+
+    \item Если
+
+        \begin{enumerate}
+            \item $\vec X \sim N(\vec m, \sum)$
+            \item $\sum$ - диагональная матрица
+        \end{enumerate}
+
+        то случайные величины $X_1, ..., X_n$ независимы (в совокупности)
+
+        \begin{note}
+            Таким образом для нормальных случайных величин из некоррелированности $\Rightarrow$ независимость (Для сл. вел. <<вообще>> это свойство неверно)
+        \end{note}
+
+    \item Пусть
+
+        \begin{enumerate}
+            \item $\vec X \sim N(\vec m, \sum)$
+            \item $\vec X = (X_1, ..., X_n)$
+
+                $\vec m = (m_1,..., m_n)$
+
+            \item
+
+                $$
+                \sum =
+                \left[
+                    \begin{matrix}
+                        \sigma_{11} & \cdots & \sigma_{1n} \\
+                        \vdots & \ddots & \vdots \\
+                        \sigma_{1n} & \cdots & \sigma_{nn} \\
+                    \end{matrix}
+                \right]
+                $$
+        \end{enumerate}
+
+        Тогда
+
+        $$
+        \vec X' = (X_1,...,X_{n-1})
+        $$
+
+        будет иметь распределение $N(\vec m', \sum')$
+
+    \item Пусть
+
+        \begin{enumerate}
+            \item $\vec X \sim N(\vec m, \sum)$
+            \item $Y = \lambda, X_1 + ... + \lambda_nX_n + \lambda_0$, где $\lambda_j \in R, j = \overline{0;n}$
+        \end{enumerate}
+
+        Тогда $Y$ имеет нормальное распределение
+
+    \item ...
+\end{enumerate}
+
+\begin{example}
+    ...
+\end{example}
 
 \end{document}
